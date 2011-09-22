@@ -16,8 +16,8 @@
 
 ## Functions
 
-murmur32(key); // return 32bit integer value
-murmur128(key); // return array that have 4 elements of 32bit integer
+    murmur32(key); // return 32bit integer value
+    murmur128(key); // return array that have 4 elements of 32bit integer
 
 ## License 
 
