@@ -1,0 +1,16 @@
+{
+    "name": "murmurhash3"
+  , "version": "0.0.1"
+  , "description": "Node binding of MurmurHash3"
+  , "keywords": []
+  , "author": "Hideaki Ohno <hide.o.j55@gmail.com>"
+  , "dependencies": {
+  	"should" : ""
+  }
+  , "main": "index"
+  , "engines": { "node": "0.4.x" }
+  , "scripts": { 
+  	"install": "node-waf configure build",
+  	"test" : "node-waf test"
+  }
+}
