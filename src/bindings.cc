@@ -1,6 +1,5 @@
-#include <node.h>
 #include <sstream>
-#include <iostream>
+#include <node.h>
 #include "Murmurhash3.h"
 
 using namespace v8;
