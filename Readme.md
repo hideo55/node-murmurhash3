@@ -5,8 +5,7 @@
 
 ## Install
 
-    #>git clone git://github.com/hideo55/node-murmurhash3.git
-    #>npm install ./node-murmurhash3
+    #>npm install murmurhash3
 
 ## Usage
 

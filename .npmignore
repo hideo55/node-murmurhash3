@@ -1,0 +1,7 @@
+.project
+.settings
+.gitignore
+.lock-wscript
+build
+murmurhash3_binding.node
+
