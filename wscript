@@ -16,7 +16,7 @@ def configure(conf):
 def build(bld):
     obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
     obj.target = 'murmurhash3_binding'
-    obj.source = './src/MurmurHash3.cc ./src/bindings.cc'
+    obj.source = './src/MurmurHash3.cpp ./src/bindings.cc'
 
 def test(tst):
   test_binary = 'node'

@@ -1,4 +1,5 @@
 #include <node.h>
+#include <sstream>
 #include <iostream>
 #include "Murmurhash3.h"
 
@@ -29,10 +30,30 @@ Handle<Value> murmur128_binding(const Arguments& args) {
 	return scope.Close(ret);
 }
 
+Handle <Value> murmur32_hex (const Arguments& args){
+	HandleScope scope;
+	Local<Integer> hashVal = murmur32_binding(args)->ToInteger();
+	std::stringstream ss;
+	ss << std::hex << hashVal->Uint32Value();
+	return scope.Close(String::New(( ss.str() ).c_str()));
+}
+
+Handle <Value> murmur128_hex (const Arguments& args){
+	HandleScope scope;
+	Local<Object> hashVals = murmur128_binding(args)->ToObject();
+	std::stringstream ss;
+	for( int i = 0; i < 4; i++ ){
+		ss << std::hex << hashVals->Get(i)->Uint32Value();
+	}
+	return scope.Close(String::New(( ss.str() ).c_str()));
+}
+
 }
 
 extern "C" void init(Handle<Object> target) {
 	HandleScope scope;
 	NODE_SET_METHOD(target, "murmur32", murmur32_binding);
+	NODE_SET_METHOD(target, "murmur32Hex", murmur32_hex);
 	NODE_SET_METHOD(target, "murmur128", murmur128_binding);
+	NODE_SET_METHOD(target, "murmur128Hex", murmur128_hex);
 }

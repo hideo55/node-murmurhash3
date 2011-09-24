@@ -16,14 +16,16 @@
 
 ## Functions
 
-    murmur32(key); // return 32bit integer value
-    murmur128(key); // return array that have 4 elements of 32bit integer
+    murmur32(key);    // return 32bit integer value
+    murmur32Hex(key); // return 32bit hexadecimal string
+    murmur128(key);   // return array that have 4 elements of 32bit integer
+    murmur128Hex(key);// return 128bit hexadecimal string
 
 ## License 
 
 (The MIT License)
 
-Copyright (c) 2011 Hideaki Ohno &lt;hide.o.j55@gmail.com&gt;
+Copyright (c) 2011 Hideaki Ohno &lt;hide.o.j55{at}gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
