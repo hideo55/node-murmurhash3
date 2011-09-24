@@ -1,7 +1,8 @@
 {
     "name": "murmurhash3"
-  , "version": "0.0.1"
+  , "version": "0.0.2"
   , "description": "Node binding of MurmurHash3"
+  , "repository" : "https://github.com/hideo55/node-murmurhash3"
   , "keywords": []
   , "author": "Hideaki Ohno <hide.o.j55@gmail.com>"
   , "dependencies": {
