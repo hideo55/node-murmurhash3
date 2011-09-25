@@ -1,3 +1,9 @@
+/*!
+ * murmurhash3
+ * Copyright(c) 2011 Hideaki Ohno <hide.o.j55{at}gmail.com>
+ * MIT Licensed
+ */
+
 #include <sstream>
 #include <node.h>
 #include "Murmurhash3.h"
