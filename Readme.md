@@ -1,7 +1,7 @@
 
 # murmurhash3
 
-  Node binding of MurmurHash3
+  Node.js binding of "MurmurHash3":http://code.google.com/p/smhasher/wiki/MurmurHash3
 
 ## Install
 
