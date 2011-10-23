@@ -2,6 +2,7 @@
 .settings
 .gitignore
 .lock-wscript
+.shipit.json
 build
 murmurhash3_binding.node
 
