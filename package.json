@@ -1,13 +1,13 @@
 {
     "name": "murmurhash3"
-  , "version": "0.0.3"
+  , "version": "0.0.4"
   , "description": "Node binding of MurmurHash3"
   , "repository" : "https://github.com/hideo55/node-murmurhash3"
   , "keywords": []
   , "author": "Hideaki Ohno <hide.o.j55@gmail.com>"
   , "dependencies": {}
   , "main": "./lib/murmurhash3.js"
-  , "engines": { "node": "0.4.x" }
+  , "engines": { "node": ">=0.4.x" }
   , "scripts": { 
   	"install": "node-waf configure build",
   	"test" : "node-waf test"

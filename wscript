@@ -21,11 +21,3 @@ def build(bld):
 def test(tst):
   test_binary = 'node'
   Utils.exec_command(test_binary + ' test.js')
-
-def shutdown():
-  t = 'murmurhash3_binding.node'
-  if Options.commands['clean']:
-    if lexists(t): unlink(t)
-  else:
-    if exists('build/default/' + t) and not lexists(t):
-      symlink('build/default/' + t, t)
