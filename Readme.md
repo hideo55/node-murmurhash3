@@ -30,8 +30,8 @@
 
     murmur32Sync(key);    // return 32bit integer value
     murmur32HexSync(key); // return 32bit hexadecimal string
-    murmur128Snyc(key);   // return array that have 4 elements of 32bit integer
-    murmur128HexSnyc(key);// return 128bit hexadecimal string
+    murmur128Sync(key);   // return array that have 4 elements of 32bit integer
+    murmur128HexSync(key);// return 128bit hexadecimal string
 
 ## License 
 
