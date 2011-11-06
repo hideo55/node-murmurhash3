@@ -19,10 +19,19 @@
 
 ## Functions
 
+###Async intefeaces
+
     murmur32(key, callback);    // return 32bit integer value
     murmur32Hex(key, callback); // return 32bit hexadecimal string
     murmur128(key, callback);   // return array that have 4 elements of 32bit integer
     murmur128Hex(key, callback);// return 128bit hexadecimal string
+
+###Sync interfaces
+
+    murmur32Sync(key);    // return 32bit integer value
+    murmur32HexSync(key); // return 32bit hexadecimal string
+    murmur128Snyc(key);   // return array that have 4 elements of 32bit integer
+    murmur128HexSnyc(key);// return 128bit hexadecimal string
 
 ## License 
 
