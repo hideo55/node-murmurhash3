@@ -1,3 +1,9 @@
+0.0.5 / 2011-11-06
+==================
+
+  * Change interface to async
+  * Add sync interface(*Sync())
+
 0.0.4 / 2011-10-18
 ==================
 

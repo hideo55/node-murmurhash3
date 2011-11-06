@@ -10,15 +10,19 @@
 ## Usage
 
     var mmh3 = require('murmurhash3');
-    var hashVal32 = mmh3.murmur32('key');
-    var hashVal128 = mmh3.murmur128('key');
+    var hashVal32 = mmh3.murmur32('key', function(err,hashvalue){
+      ...
+   	});
+    var hashVal128 = mmh3.murmur128('key', function(err,hashvalue){
+      ...
+    });
 
 ## Functions
 
-    murmur32(key);    // return 32bit integer value
-    murmur32Hex(key); // return 32bit hexadecimal string
-    murmur128(key);   // return array that have 4 elements of 32bit integer
-    murmur128Hex(key);// return 128bit hexadecimal string
+    murmur32(key, callback);    // return 32bit integer value
+    murmur32Hex(key, callback); // return 32bit hexadecimal string
+    murmur128(key, callback);   // return array that have 4 elements of 32bit integer
+    murmur128Hex(key, callback);// return 128bit hexadecimal string
 
 ## License 
 

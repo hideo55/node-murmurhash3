@@ -5,19 +5,34 @@ var test_data = [["Hello", 0x12da77c8, [0x2360ae46, 0x5e6336c6, 0xad45b3f4, 0xad
 
 for( i = 0; i < test_data.length; i++) {(function() {
     var val = test_data[i];
-    var res;
-    res = mmh3.murmur32(val[0]);
+    mmh3.murmur32(val[0], function(err, res) {
+      assert.equal(res, val[1], 'murmur32-' + i);
+    });
+    mmh3.murmur32Hex(val[0], function(err, res) {
+      assert.equal(res, val[1].toString(16), 'murmur32Hex-' + i);
+    });
+    mmh3.murmur128(val[0], function(err, res) {
+      assert.deepEqual(res, val[2], 'murmur128-' + i);
+    });
+    mmh3.murmur128Hex(val[0], function(err, res) {
+      var expect = '';
+      for(var j = 0; j < 4; j++) {
+        expect += val[2][j].toString(16);
+      }
+      assert.equal(res, expect, 'murmur128Hex-' + i);
+    });
+   var res;
+    res = mmh3.murmur32Sync(val[0]);
     assert.equal(res, val[1], 'murmur32-' + i);
-    res = mmh3.murmur32Hex(val[0]);
+    res = mmh3.murmur32HexSync(val[0]);
     assert.equal(res, val[1].toString(16), 'murmur32Hex-' + i);
-    res = mmh3.murmur128(val[0]);
+    res = mmh3.murmur128Sync(val[0]);
     assert.deepEqual(res, val[2], 'murmur128-' + i);
-    res = mmh3.murmur128Hex(val[0]);
+    res = mmh3.murmur128HexSync(val[0]);
     var expect = '';
     for(var j = 0; j < 4; j++) {
       expect += val[2][j].toString(16);
     }
     assert.equal(res, expect, 'murmur128Hex-' + i);
-
   })();
 }

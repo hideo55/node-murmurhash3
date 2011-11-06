@@ -9,7 +9,7 @@
   , "main": "./lib/murmurhash3.js"
   , "engines": { "node": ">=0.4.x" }
   , "scripts": { 
-  	"install": "node-waf configure build",
+  	"install": "node-waf clean configure build",
   	"test" : "node-waf test"
   }
 }
