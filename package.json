@@ -13,6 +13,6 @@
   , "engines": { "node": ">=0.4.x" }
   , "scripts": { 
   	"install": "node-waf clean configure build",
-  	"test" : "node-waf test"
+  	"test" : "nodeunit test.js"
   }
 }
