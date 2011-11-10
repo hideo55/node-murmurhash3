@@ -9,7 +9,7 @@
 #include <node_version.h>
 #include <iostream>
 #include <sstream>
-#include "Murmurhash3.h"
+#include "MurmurHash3.h"
 
 using namespace v8;
 using namespace node;
