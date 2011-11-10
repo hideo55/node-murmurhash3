@@ -3,6 +3,7 @@
 .gitignore
 .lock-wscript
 .shipit.json
+.travis.yml
 build
 murmurhash3_binding.node
 
