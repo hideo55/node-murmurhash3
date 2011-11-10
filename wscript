@@ -17,5 +17,5 @@ def build(bld):
     obj.source = './src/MurmurHash3.cpp ./src/bindings.cc'
 
 def test(tst):
-  test_binary = 'node'
+  test_binary = 'nodeunit'
   Utils.exec_command(test_binary + ' test.js')
