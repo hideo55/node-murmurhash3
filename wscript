@@ -13,5 +13,5 @@ def configure(conf):
 
 def build(bld):
     obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
-    obj.target = 'murmurhash3_binding'
-    obj.source = './src/MurmurHash3.cpp ./src/bindings.cc'
+    obj.target = 'murmurhash3'
+    obj.source = './src/node_murmurhash3.cc ./src/MurmurHash3.cpp'
