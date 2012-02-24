@@ -4,6 +4,6 @@
 .lock-wscript
 .shipit.json
 .travis.yml
-build
+build/
 murmurhash3_binding.node
 
