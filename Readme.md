@@ -3,6 +3,16 @@
 
   Node.js binding of [MurmurHash3](http://code.google.com/p/smhasher/wiki/MurmurHash3)
 
+## Requirement
+
+### Node v0.4
+
+You must use node-murmurhash3 0.0.6.
+
+### Node v0.6
+
+You must use node-murmurhash3 0.0.8 or later.
+
 ## Install
 
     #>npm install murmurhash3
