@@ -5,7 +5,9 @@
 	"repository": "https://github.com/hideo55/node-murmurhash3",
 	"keywords": ["hash", "murmurhash"],
 	"author": "Hideaki Ohno <hide.o.j55@gmail.com>",
-	"dependencies": {},
+	"dependencies": {
+		"node-gyp": ""
+	},
 	"devDependencies": {
 		"nodeunit": ""
 	},
@@ -14,7 +16,7 @@
 		"node": ">=0.6.x"
 	},
 	"scripts": {
-		"install": "node-waf configure build",
+		"install": "node-gyp configure build",
 		"test": "nodeunit --reporter tap test.js"
 	}
 }

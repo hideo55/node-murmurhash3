@@ -80,7 +80,7 @@ Handle<Value> murmur32_async(const Arguments& args) {
 
     Baton* baton = new Baton(key, args[1]->ToBoolean()->Value(), callback);
 
-    int status = uv_queue_work(uv_default_loop(), &baton->request, Work_murmur32, Work_After_murmur32);
+    uv_queue_work(uv_default_loop(), &baton->request, Work_murmur32, Work_After_murmur32);
 
     return scope.Close(Undefined());
 }
@@ -96,7 +96,7 @@ Handle<Value> murmur128_async(const Arguments& args) {
 
     Baton* baton = new Baton(key, args[1]->ToBoolean()->Value(), callback);
 
-    int status = uv_queue_work(uv_default_loop(), &baton->request, Work_murmur128, Work_After_murmur128);
+    uv_queue_work(uv_default_loop(), &baton->request, Work_murmur128, Work_After_murmur128);
 
     return scope.Close(Undefined());
 }
