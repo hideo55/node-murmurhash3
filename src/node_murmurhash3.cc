@@ -8,6 +8,7 @@
 #include <node.h>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 #include "MurmurHash3.h"
 
 #define REQ_ARG_COUNT_AND_TYPE(I, TYPE) \
@@ -116,7 +117,7 @@ Handle<Value> murmur32_sync(const Arguments& args) {
 
     if (isHexMode) {
         std::stringstream ss;
-        ss << std::hex << out;
+        ss << std::hex << std::setfill('0') << std::setw(8) << out;
         return scope.Close(String::New((ss.str()).c_str()));
     } else {
         return scope.Close(Integer::New(out));
@@ -138,8 +139,9 @@ Handle<Value> murmur128_sync(const Arguments& args) {
 
     if (isHexMode) {
         std::stringstream ss;
+        ss << std::hex << std::setfill('0');
         for (int i = 0; i < 4; i++) {
-            ss << std::hex << out[i];
+            ss << std::setw(8) << out[i];
         }
         return scope.Close(String::New((ss.str()).c_str()));
     } else {
@@ -170,7 +172,7 @@ void Work_After_murmur32(uv_work_t* req) {
     if (baton->isHexMode) {
         Local < Value > tmp = Integer::New(baton->result[0]);
         std::stringstream ss;
-        ss << std::hex << tmp->Uint32Value();
+        ss << std::hex << std::setfill('0') << std::setw(8) << tmp->Uint32Value();
         res[1] = String::New((ss.str()).c_str());
     } else {
         res[1] = Integer::NewFromUnsigned(baton->result[0]);
@@ -205,8 +207,9 @@ void Work_After_murmur128(uv_work_t *req) {
 
     if (baton->isHexMode) {
         std::stringstream ss;
+        ss << std::hex << std::setfill('0');
         for (int i = 0; i < 4; i++) {
-            ss << std::hex << result[i];
+            ss << std::setw(8) << result[i];
         }
         res[1] = String::New((ss.str()).c_str());
     } else {
