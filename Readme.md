@@ -9,7 +9,7 @@
 
 You must use node-murmurhash3 0.0.6.
 
-### Node v0.6
+### Node v0.6 (v0.6.13 or later)
 
 You must use node-murmurhash3 0.0.8 or later.
 

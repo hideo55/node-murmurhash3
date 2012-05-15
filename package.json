@@ -12,7 +12,7 @@
   },
   "main": "./lib/murmurhash3.js",
   "engines": {
-    "node": ">=0.6.x"
+    "node": ">=0.6.13"
   },
   "scripts": {
     "test": "nodeunit --reporter tap test.js"
