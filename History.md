@@ -1,3 +1,9 @@
+0.0.10 / 2012-05-16
+==================
+
+  * Fix and consistency for hex encoding.
+  * Change version dependency.
+
 0.0.9 / 2012-04-21
 ==================
 
