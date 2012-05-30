@@ -46,12 +46,10 @@ struct Baton {
 
     Baton(std::string key_, bool isHexMode_, v8::Handle<v8::Function> cb_) :
         key(key_), isHexMode(isHexMode_) {
-        uv_ref( uv_default_loop());
         request.data = this;
         callback = v8::Persistent<v8::Function>::New(cb_);
     }
     virtual ~Baton() {
-        uv_unref( uv_default_loop());
         callback.Dispose();
     }
 };
