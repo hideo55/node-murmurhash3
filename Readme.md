@@ -3,7 +3,7 @@
 
   Node.js binding of [MurmurHash3](http://code.google.com/p/smhasher/wiki/MurmurHash3)
 
- [![Build Status](https://secure.travis-ci.org/hideo55/node-murmurhash3.png)](http://travis-ci.orghideo55/node-murmurhash3)
+ [![Build Status](https://secure.travis-ci.org/hideo55/node-murmurhash3.png)](http://travis-ci.org/hideo55/node-murmurhash3)
 
 ## Requirement
 
