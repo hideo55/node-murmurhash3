@@ -1,6 +1,6 @@
 {
   "name": "murmurhash3",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "description": "Node binding of MurmurHash3",
   "repository": "https://github.com/hideo55/node-murmurhash3",
   "homepage": "http://hideo55.github.com/node-murmurhash3/",
