@@ -49,7 +49,7 @@ You must use node-murmurhash3 0.0.8 or later.
 
 (The MIT License)
 
-Copyright (c) 2011 Hideaki Ohno &lt;hide.o.j55{at}gmail.com&gt;
+Copyright (c) 2012 Hideaki Ohno &lt;hide.o.j55{at}gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
