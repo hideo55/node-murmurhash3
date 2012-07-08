@@ -1,77 +1,121 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8'>
 
-  <title>hideo55/node-murmurhash3 @ GitHub</title>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Node-murmurhash3 : Node binding of MurmurHash3" />
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #f0f0e5;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #e54d3e; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #e54d3e; }
-    h3 { text-align: center; color: #e54d3e; }
-    a { color: #e54d3e; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-<body>
-  <a href="http://github.com/hideo55/node-murmurhash3"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+    <title>Node-murmurhash3</title>
+  </head>
 
-  <div id="container">
+  <body>
 
-    <div class="download">
-      <a href="http://github.com/hideo55/node-murmurhash3/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/hideo55/node-murmurhash3/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/hideo55/node-murmurhash3">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Node-murmurhash3</h1>
+          <h2 id="project_tagline">Node binding of MurmurHash3</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/hideo55/node-murmurhash3/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/hideo55/node-murmurhash3/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
     </div>
 
-    <h1><a href="http://github.com/hideo55/node-murmurhash3">node-murmurhash3</a>
-      <span class="small">by <a href="http://github.com/hideo55">hideo55</a></span></h1>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>murmurhash3</h1>
 
-    <div class="description">
-      Node binding of MurmurHash3
+<p>Node.js binding of <a href="http://code.google.com/p/smhasher/wiki/MurmurHash3">MurmurHash3</a></p>
+
+<h2>Requirement</h2>
+
+<h3>Node v0.4</h3>
+
+<p>You must use node-murmurhash3 0.0.6.</p>
+
+<h3>Node v0.6(v0.6.13 or later)</h3>
+
+<p>You must use node-murmurhash3 0.0.8 or later.</p>
+
+<h3>Node v0.8</h3>
+
+<p>You must use node-murmurhash3 0.0.8 or later</p>
+
+<h2>Install</h2>
+
+<pre><code>#&gt;npm install murmurhash3
+</code></pre>
+
+<h2>Usage</h2>
+
+<pre><code>var mmh3 = require('murmurhash3');
+var hashVal32 = mmh3.murmur32('key', function(err,hashvalue){
+  ...
+});
+var hashVal128 = mmh3.murmur128('key', function(err,hashvalue){
+  ...
+});
+</code></pre>
+
+<h2>Functions</h2>
+
+<h3>Async intefeaces</h3>
+
+<pre><code>murmur32(key, callback);    // return 32bit integer value
+murmur32Hex(key, callback); // return 32bit hexadecimal string
+murmur128(key, callback);   // return array that have 4 elements of 32bit integer
+murmur128Hex(key, callback);// return 128bit hexadecimal string
+</code></pre>
+
+<h3>Sync interfaces</h3>
+
+<pre><code>murmur32Sync(key);    // return 32bit integer value
+murmur32HexSync(key); // return 32bit hexadecimal string
+murmur128Sync(key);   // return array that have 4 elements of 32bit integer
+murmur128HexSync(key);// return 128bit hexadecimal string
+</code></pre>
+
+<h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2011 Hideaki Ohno &lt;hide.o.j55{at}gmail.com&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
     </div>
 
-    <h2>Authors</h2>
-<p>hideo55 (hide.o.j55@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Hideaki Ohno (hide.o.j55@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/hideo55/node-murmurhash3/zipball/master">zip</a> or
-      <a href="http://github.com/hideo55/node-murmurhash3/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/hideo55/node-murmurhash3</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/hideo55/node-murmurhash3">hideo55/node-murmurhash3</a>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Node-murmurhash3 maintained by <a href="https://github.com/hideo55">hideo55</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
     </div>
-
-  </div>
-
-  
-</body>
+  </body>
 </html>
