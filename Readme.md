@@ -15,6 +15,10 @@ You must use node-murmurhash3 0.0.6.
 
 You must use node-murmurhash3 0.0.8 or later.
 
+### Node v0.8
+
+You must use node-murmurhash3 0.0.8 or later.
+
 ## Install
 
     #>npm install murmurhash3
