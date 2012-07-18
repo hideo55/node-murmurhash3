@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Node binding of MurmurHash3",
   "repository": "https://github.com/hideo55/node-murmurhash3",
+  "bugs": {
+  	"url": "https://github.com/hideo55/node-murmurhash3/issues"
+  },
   "homepage": "http://hideo55.github.com/node-murmurhash3/",
   "keywords": ["hash", "murmurhash"],
   "author": "Hideaki Ohno <hide.o.j55@gmail.com>",
