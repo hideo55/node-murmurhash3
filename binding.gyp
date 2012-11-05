@@ -9,7 +9,7 @@
       'cflags_cc!': ['-fno-exception'],
       'conditions': [
         ['OS=="win"', {
-            'msvc_settings': {
+            'msvs_settings': {
               'VCCLCompilerTool': {
                 'AddtionalOptions': ['/EHsc']
               }
