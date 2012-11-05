@@ -1,3 +1,9 @@
+0.1.2 / 2012-11-06
+==================
+
+  * Fixed: Problem in old gcc with '__attribute__(always_inline)'
+  * Fixed: Compile error in Windows environment
+
 0.1.1 / 2012-07-19
 ==================
 
