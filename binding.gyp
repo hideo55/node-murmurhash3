@@ -8,6 +8,14 @@
       'cflags!': ['-fno-exceptions'],
       'cflags_cc!': ['-fno-exception'],
       'conditions': [
+        ['OS=="win"', {
+            'msvc_settings': {
+              'VCCLCompilerTool': {
+                'AddtionalOptions': ['/EHsc']
+              }
+            }
+          }
+        ],
         ['OS=="mac"', {
             'xcode_settings': {
               'GCC_ENABLE_CPP_EXCEPTIONS': 'YES'
