@@ -1,11 +1,14 @@
 /*!
- * murmurhash3
+ * node-murmurhash3
  * Copyright(c) 2011 Hideaki Ohno <hide.o.j55{at}gmail.com>
  * MIT Licensed
  */
+#ifndef BUILDING_NODE_EXTENSION
 #define BUILDING_NODE_EXTENSION
+#endif
 #include <v8.h>
 #include <node.h>
+#include <node_version.h>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -59,9 +62,14 @@ void Init(Handle<Object> target);
 
 //uv async functions
 void Work_murmur32(uv_work_t* req);
-void Work_After_murmur32(uv_work_t* req);
 void Work_murmur128(uv_work_t* req);
+#if NODE_VERSION_AT_LEAST(0,9,4)
+void Work_After_murmur32(uv_work_t* req, int status);
+void Work_After_murmur128(uv_work_t* req, int status);
+#else
+void Work_After_murmur32(uv_work_t* req);
 void Work_After_murmur128(uv_work_t* req);
+#endif
 
 Handle<Value> murmur32_async(Arguments& args);
 Handle<Value> murmur128_async(Arguments& args);
@@ -160,7 +168,11 @@ void Work_murmur32(uv_work_t* req) {
     baton->result[0] = out;
 }
 
+#if NODE_VERSION_AT_LEAST(0,9,4)
+void Work_After_murmur32(uv_work_t* req, int status) {
+#else
 void Work_After_murmur32(uv_work_t* req) {
+#endif
     HandleScope scope;
     Baton *baton = static_cast<Baton *> (req->data);
 
@@ -194,7 +206,11 @@ void Work_murmur128(uv_work_t *req) {
     }
 }
 
+#if NODE_VERSION_AT_LEAST(0,9,4)
+void Work_After_murmur128(uv_work_t *req, int status) {
+#else
 void Work_After_murmur128(uv_work_t *req) {
+#endif
     HandleScope scope;
     Baton *baton = static_cast<Baton *> (req->data);
 
