@@ -1,3 +1,8 @@
+0.1.4 / 2013-0118
+==================
+
+    * Change internal interface for support node v0.9.4 and subsequent versions.
+
 0.1.3 / 2012-11-21
 ==================
 
