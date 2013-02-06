@@ -1,4 +1,9 @@
-0.1.4 / 2013-0118
+0.1.5 / 2013-02-06
+==================
+
+    *  Update document
+
+0.1.4 / 2013-01-18
 ==================
 
     * Change internal interface for support node v0.9.4 and subsequent versions.
