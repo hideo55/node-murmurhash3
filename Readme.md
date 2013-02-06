@@ -1,4 +1,3 @@
-
 # murmurhash3
 
   Node.js binding of [MurmurHash3](http://code.google.com/p/smhasher/wiki/MurmurHash3)
@@ -26,10 +25,12 @@ You must use node-murmurhash3 0.0.8 or later.
 ## Usage
 
     var mmh3 = require('murmurhash3');
-    var hashVal32 = mmh3.murmur32('key', function(err,hashvalue){
+    mmh3.murmur32('key', function(err,hashValue){
+      if (err) throw err;
       ...
    	});
-    var hashVal128 = mmh3.murmur128('key', function(err,hashvalue){
+    mmh3.murmur128('key', function(err,hashValue){
+      if (err) throw err;
       ...
     });
 
@@ -41,6 +42,8 @@ You must use node-murmurhash3 0.0.8 or later.
     murmur32Hex(key, callback); // return 32bit hexadecimal string
     murmur128(key, callback);   // return array that have 4 elements of 32bit integer
     murmur128Hex(key, callback);// return 128bit hexadecimal string
+
+The callback gets two arguments `(error, hashValue)`. 
 
 ###Sync interfaces
 
