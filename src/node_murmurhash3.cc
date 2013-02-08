@@ -12,6 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <memory>
 #include "MurmurHash3.h"
 
 #define REQ_ARG_COUNT_AND_TYPE(I, TYPE) \
