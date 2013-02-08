@@ -1,6 +1,6 @@
 /*!
  * node-murmurhash3
- * Copyright(c) 2011 Hideaki Ohno <hide.o.j55{at}gmail.com>
+ * Copyright(c) 2013 Hideaki Ohno <hide.o.j55{at}gmail.com>
  * MIT Licensed
  */
 #ifndef BUILDING_NODE_EXTENSION
@@ -12,6 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <memory>
 #include "MurmurHash3.h"
 
 #define REQ_ARG_COUNT_AND_TYPE(I, TYPE) \
@@ -58,7 +59,7 @@ struct Baton {
 };
 
 //Initialize
-void Init(Handle<Object> target);
+void Initialize(Handle<Object> target);
 
 //uv async functions
 void Work_murmur32(uv_work_t* req);
@@ -174,9 +175,9 @@ void Work_After_murmur32(uv_work_t* req, int status) {
 void Work_After_murmur32(uv_work_t* req) {
 #endif
     HandleScope scope;
-    Baton *baton = static_cast<Baton *> (req->data);
+    std::auto_ptr<Baton> baton(static_cast<Baton *> (req->data));
 
-    Handle < Value > res[2];
+    Local <Value> res[2];
     res[0] = Local<Value>::New(Null());
 
     if (baton->isHexMode) {
@@ -192,10 +193,11 @@ void Work_After_murmur32(uv_work_t* req) {
         TRY_CATCH_CALL(Context::GetCurrent()->Global(), baton->callback, 2, res);
     }
 
-    delete baton;
+    scope.Close(Undefined());
 }
 
 void Work_murmur128(uv_work_t *req) {
+
     Baton *baton = static_cast<Baton *> (req->data);
     uint32_t seed = 0;
     uint32_t out[4];
@@ -212,7 +214,7 @@ void Work_After_murmur128(uv_work_t *req, int status) {
 void Work_After_murmur128(uv_work_t *req) {
 #endif
     HandleScope scope;
-    Baton *baton = static_cast<Baton *> (req->data);
+    std::auto_ptr<Baton> baton(static_cast<Baton *> (req->data));
 
     uint32_t *result = baton->result;
 
@@ -239,15 +241,14 @@ void Work_After_murmur128(uv_work_t *req) {
         TRY_CATCH_CALL(Context::GetCurrent()->Global(), baton->callback, 2, res);
     }
 
-    delete baton;
+    scope.Close(Undefined());
 }
 
-void Init(Handle<Object> target) {
-    HandleScope scope;
+void Initialize(Handle<Object> target) {
     NODE_SET_METHOD(target, "murmur32", murmur32_async);
     NODE_SET_METHOD(target, "murmur128", murmur128_async);
     NODE_SET_METHOD(target, "murmur32Sync", murmur32_sync);
     NODE_SET_METHOD(target, "murmur128Sync", murmur128_sync);
 }
 
-NODE_MODULE(murmurhash3, Init);
+NODE_MODULE(murmurhash3, Initialize)
