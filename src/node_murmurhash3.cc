@@ -178,7 +178,9 @@ void Work_After_murmur32(uv_work_t* req) {
     std::auto_ptr<Baton> baton(static_cast<Baton *> (req->data));
 
     Local <Value> res[2];
+/*
     res[0] = Local<Value>::New(Null());
+    res[1] = Local<Value>::New(Null());
 
     if (baton->isHexMode) {
         Local < Value > tmp = Integer::New(baton->result[0]);
@@ -188,9 +190,9 @@ void Work_After_murmur32(uv_work_t* req) {
     } else {
         res[1] = Integer::NewFromUnsigned(baton->result[0]);
     }
-
+*/
     if (!baton->callback.IsEmpty() && baton->callback->IsFunction()) {
-        TRY_CATCH_CALL(Context::GetCurrent()->Global(), baton->callback, 2, res);
+        TRY_CATCH_CALL(Context::GetCurrent()->Global(), baton->callback, 0, res);
     }
 
     scope.Close(Undefined());
@@ -218,7 +220,7 @@ void Work_After_murmur128(uv_work_t *req) {
 
     uint32_t *result = baton->result;
 
-    Handle < Value > res[2];
+    Local < Value > res[2];
     res[0] = Local<Value>::New(Null());
 
     if (baton->isHexMode) {
