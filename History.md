@@ -1,22 +1,22 @@
 0.1.6 / 2013-02-13
 ==================
 
-    * Fixed: Build problem in node v0.9.9
+  * Fixed: Build problem in node v0.9.9
 
 0.1.5 / 2013-02-06
 ==================
 
-    *  Update document
+  * Update document
 
 0.1.4 / 2013-01-18
 ==================
 
-    * Change internal interface for support node v0.9.4 and subsequent versions.
+  * Change internal interface for support node v0.9.4 and subsequent versions.
 
 0.1.3 / 2012-11-21
 ==================
 
-    * Fixed: Typo in binding.gyp
+  * Fixed: Typo in binding.gyp
 
 0.1.2 / 2012-11-06
 ==================
