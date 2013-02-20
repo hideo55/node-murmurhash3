@@ -1,10 +1,10 @@
 {
   "name": "murmurhash3",
-  "version": "0.1.6",
+  "version": "0.1.5",
   "description": "Node binding of MurmurHash3",
   "repository": "https://github.com/hideo55/node-murmurhash3",
   "bugs": {
-  	"url": "https://github.com/hideo55/node-murmurhash3/issues"
+    "url": "https://github.com/hideo55/node-murmurhash3/issues"
   },
   "homepage": "http://hideo55.github.com/node-murmurhash3/",
   "keywords": ["hash", "murmurhash"],
@@ -12,13 +12,13 @@
   "dependencies": {
   },
   "devDependencies": {
-    "nodeunit": "0.7.4"
+    "whiskey": "0.6.13"
   },
   "main": "./lib/murmurhash3.js",
   "engines": {
     "node": ">=0.6.13"
   },
   "scripts": {
-    "test": "nodeunit test.js"
+    "test": "whiskey --tests test.js"
   }
 }
