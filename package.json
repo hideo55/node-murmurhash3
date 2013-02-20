@@ -12,13 +12,13 @@
   "dependencies": {
   },
   "devDependencies": {
-    "whiskey": "0.6.13"
+    "mocha": "1.8.1"
   },
   "main": "./lib/murmurhash3.js",
   "engines": {
     "node": ">=0.6.13"
   },
   "scripts": {
-    "test": "whiskey --tests test.js"
+    "test": "mocha -R spec test.js"
   }
 }
