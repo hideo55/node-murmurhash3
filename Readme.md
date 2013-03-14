@@ -1,26 +1,27 @@
 # murmurhash3
 
-  Node.js binding of [MurmurHash3](http://code.google.com/p/smhasher/wiki/MurmurHash3)
+  Node.js binding of [MurmurHash3](http://code.google.com/p/smhasher/wiki/MurmurHash3) C++ implementaion.
 
  [![Build Status](https://secure.travis-ci.org/hideo55/node-murmurhash3.png)](http://travis-ci.org/hideo55/node-murmurhash3)
 
+## Install
+
+    $ npm install murmurhash3
+    
+or
+
+    $ git clone https://github.com/hideo55/node-murmurhash3.git
+    $ npm install ./node-murmurhash
+
 ## Requirement
 
-### Node v0.4
+### Node v0.4 and v0.6(v0.6.12 or prior)
 
 You must use node-murmurhash3 0.0.6.
 
-### Node v0.6 (v0.6.13 or later)
+### Node v0.6 (v0.6.13 or later) and v0.8
 
 You must use node-murmurhash3 0.0.8 or later.
-
-### Node v0.8
-
-You must use node-murmurhash3 0.0.8 or later.
-
-## Install
-
-    #>npm install murmurhash3
 
 ## Usage
 
@@ -51,6 +52,12 @@ The callback gets two arguments `(error, hashValue)`.
     murmur32HexSync(key); // return 32bit hexadecimal string
     murmur128Sync(key);   // return array that have 4 elements of 32bit integer
     murmur128HexSync(key);// return 128bit hexadecimal string
+
+## Author
+
+Hideaki Ohno  &lt;hide.o.j55{at}gmail.com&gt;
+
+MurmurHash3(C++ implementaion) by Austin Appleby
 
 ## License 
 
