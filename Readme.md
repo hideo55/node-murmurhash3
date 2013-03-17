@@ -39,19 +39,22 @@ You must use node-murmurhash3 0.0.8 or later.
 
 ###Async intefeaces
 
-    murmur32(key, callback);    // return 32bit integer value
-    murmur32Hex(key, callback); // return 32bit hexadecimal string
-    murmur128(key, callback);   // return array that have 4 elements of 32bit integer
-    murmur128Hex(key, callback);// return 128bit hexadecimal string
+    murmur32(key [,seed], callback);    // return 32bit integer value
+    murmur32Hex(key [,seed], callback); // return 32bit hexadecimal string
+    murmur128(key [,seed], callback);   // return array that have 4 elements of 32bit integer
+    murmur128Hex(key [,seed], callback);// return 128bit hexadecimal string
 
-The callback gets two arguments `(error, hashValue)`. 
+- 'seed' is optional argument. (unsigned integer)
+- The callback gets two arguments `(error, hashValue)`. 
 
 ###Sync interfaces
 
-    murmur32Sync(key);    // return 32bit integer value
-    murmur32HexSync(key); // return 32bit hexadecimal string
-    murmur128Sync(key);   // return array that have 4 elements of 32bit integer
-    murmur128HexSync(key);// return 128bit hexadecimal string
+    murmur32Sync(key [,seed]);    // return 32bit integer value
+    murmur32HexSync(key, [,seed]); // return 32bit hexadecimal string
+    murmur128Sync(key [,seed]);   // return array that have 4 elements of 32bit integer
+    murmur128HexSync(key [,seed]);// return 128bit hexadecimal string
+
+- 'seed' is optional argument. (unsigned integer)
 
 ## Author
 

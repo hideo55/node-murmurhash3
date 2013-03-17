@@ -23,8 +23,20 @@ for (; i < testData.length; i++) {
             done();
           });
         });
+        it('integer - with seed', function(done) {
+          mmh3.murmur32(val[0], 0, function(err, res) {
+            assert.equal(res, val[1]);
+            done();
+          });
+        });
         it('hex', function(done) {
           mmh3.murmur32Hex(val[0], function(err, res) {
+            assert.equal(res, zeroFill(val[1].toString(16), 8));
+            done();
+          });
+        });
+        it('hex - with seed', function(done) {
+          mmh3.murmur32Hex(val[0], 0, function(err, res) {
             assert.equal(res, zeroFill(val[1].toString(16), 8));
             done();
           });
@@ -37,8 +49,24 @@ for (; i < testData.length; i++) {
             done();
           });
         });
+        it('integer - with seed', function(done) {
+          mmh3.murmur128(val[0], 0, function(err, res) {
+            assert.deepEqual(res, val[2]);
+            done();
+          });
+        });
         it('hex', function(done) {
           mmh3.murmur128Hex(val[0], function(err, res) {
+            var expect = '';
+            for (var j = 0; j < 4; j++) {
+              expect += zeroFill(val[2][j].toString(16), 8);
+            }
+            assert.equal(res, expect);
+            done();
+          });
+        });
+        it('hex - with seed', function(done) {
+          mmh3.murmur128Hex(val[0], 0, function(err, res) {
             var expect = '';
             for (var j = 0; j < 4; j++) {
               expect += zeroFill(val[2][j].toString(16), 8);
@@ -57,8 +85,18 @@ for (; i < testData.length; i++) {
           assert.equal(res, val[1]);
           done();
         });
+        it('integer - with seed', function(done) {
+          var res = mmh3.murmur32Sync(val[0], 0);
+          assert.equal(res, val[1]);
+          done();
+        });
         it('hex', function(done) {
           var res = mmh3.murmur32HexSync(val[0]);
+          assert.equal(res, zeroFill(val[1].toString(16), 8));
+          done();
+        });
+        it('hex - with seed ', function(done) {
+          var res = mmh3.murmur32HexSync(val[0], 0);
           assert.equal(res, zeroFill(val[1].toString(16), 8));
           done();
         });
@@ -66,6 +104,11 @@ for (; i < testData.length; i++) {
       describe('murmur128', function() {
         it('integer', function(done) {
           var res = mmh3.murmur128Sync(val[0]);
+          assert.deepEqual(res, val[2]);
+          done();
+        });
+        it('integer - with seed', function(done) {
+          var res = mmh3.murmur128Sync(val[0], 0);
           assert.deepEqual(res, val[2]);
           done();
         });
@@ -78,7 +121,101 @@ for (; i < testData.length; i++) {
           assert.equal(res, expect);
           done();
         });
+        it('hex - with seed', function(done) {
+          var res = mmh3.murmur128HexSync(val[0], 0);
+          var expect = '';
+          for (var j = 0; j < 4; j++) {
+            expect += zeroFill(val[2][j].toString(16), 8);
+          }
+          assert.equal(res, expect);
+          done();
+        });
       });
     });
   });
 }
+
+describe('Exception', function() {
+  describe('Argument', function() {
+    describe('murmur32', function() {
+      it('key must be string', function(done) {
+        try {
+          mmh3.murmur32();
+        } catch(e) {
+          if ((new RegExp(/^Argument 0 must be a String/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('seed must be unsigned integer', function(done) {
+        try {
+          mmh3.murmur32('key', -1);
+        } catch(e) {
+          if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+    });
+    describe('murmur128', function() {
+      it('key must be string', function(done) {
+        try {
+          mmh3.murmur128();
+        } catch(e) {
+          if ((new RegExp(/^Argument 0 must be a String/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('seed must be unsigned integer', function(done) {
+        try {
+          mmh3.murmur128('key', -1);
+        } catch(e) {
+          if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+    });  
+    describe('murmur32Sync', function() {
+      it('key must be string', function(done) {
+        try {
+          mmh3.murmur32Sync();
+        } catch(e) {
+          if ((new RegExp(/^Argument 0 must be a String/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('seed must be unsigned integer', function(done) {
+        try {
+          mmh3.murmur32Sync('key', -1);
+        } catch(e) {
+          if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+    });
+    describe('murmur128Sync', function() {
+      it('key must be string', function(done) {
+        try {
+          mmh3.murmur128Sync();
+        } catch(e) {
+          if ((new RegExp(/^Argument 0 must be a String/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('seed must be unsigned integer', function(done) {
+        try {
+          mmh3.murmur128Sync('key', -1);
+        } catch(e) {
+          if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+    });  
+  });
+});

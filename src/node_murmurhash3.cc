@@ -30,6 +30,8 @@
 
 #define REQ_BOOL_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, Boolean)
 
+#define REQ_UINT32_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, Uint32)
+
 #define TRY_CATCH_CALL(context, callback, argc, argv)                          \
     TryCatch try_catch;                                                        \
     (callback)->Call((context), (argc), (argv));                               \
@@ -45,13 +47,14 @@ struct Baton {
     v8::Persistent<v8::Function> callback;
 
     std::string key;
+    uint32_t seed;
     bool isHexMode;
     uint32_t result[4];
 
-    Baton(std::string key_, bool isHexMode_, v8::Handle<v8::Function> cb_) :
-        key(key_), isHexMode(isHexMode_) {
+    Baton(std::string key_, uint32_t seed_, bool isHexMode_, v8::Handle<v8::Function> cb_) :
+            key(key_), seed(seed_), isHexMode(isHexMode_) {
         request.data = this;
-        callback = v8::Persistent<v8::Function>::New(cb_);
+        callback = v8::Persistent < v8::Function > ::New(cb_);
     }
     virtual ~Baton() {
         callback.Dispose();
@@ -81,12 +84,14 @@ Handle<Value> murmur32_async(const Arguments& args) {
     HandleScope scope;
 
     REQ_STR_ARG(0);
-    REQ_BOOL_ARG(1);
-    REQ_FUN_ARG(2, callback);
+    REQ_UINT32_ARG(1);
+    REQ_BOOL_ARG(2);
+    REQ_FUN_ARG(3, callback);
 
     std::string key = *String::Utf8Value(args[0]->ToString());
+    uint32_t seed = args[1]->ToUint32()->Value();
 
-    Baton* baton = new Baton(key, args[1]->ToBoolean()->Value(), callback);
+    Baton* baton = new Baton(key, seed, args[2]->ToBoolean()->Value(), callback);
 
     uv_queue_work(uv_default_loop(), &baton->request, Work_murmur32, Work_After_murmur32);
 
@@ -97,12 +102,13 @@ Handle<Value> murmur128_async(const Arguments& args) {
     HandleScope scope;
 
     REQ_STR_ARG(0);
-    REQ_BOOL_ARG(1);
-    REQ_FUN_ARG(2, callback);
+    REQ_UINT32_ARG(1);
+    REQ_BOOL_ARG(2);
+    REQ_FUN_ARG(3, callback);
 
     std::string key = *String::Utf8Value(args[0]->ToString());
-
-    Baton* baton = new Baton(key, args[1]->ToBoolean()->Value(), callback);
+    uint32_t seed = args[1]->ToUint32()->Value();
+    Baton* baton = new Baton(key, seed, args[2]->ToBoolean()->Value(), callback);
 
     uv_queue_work(uv_default_loop(), &baton->request, Work_murmur128, Work_After_murmur128);
 
@@ -111,16 +117,17 @@ Handle<Value> murmur128_async(const Arguments& args) {
 
 Handle<Value> murmur32_sync(const Arguments& args) {
     HandleScope scope;
-    uint32_t seed = 0;
     uint32_t out;
 
     REQ_STR_ARG(0);
-    REQ_BOOL_ARG(1);
+    REQ_UINT32_ARG(1);
+    REQ_BOOL_ARG(2);
 
     String::Utf8Value key(args[0]->ToString());
-    bool isHexMode = args[1]->ToBoolean()->Value();
+    uint32_t seed = args[1]->ToUint32()->Value();
+    bool isHexMode = args[2]->ToBoolean()->Value();
 
-    MurmurHash3_x86_32(reinterpret_cast<const char *> (*key), (int) key.length(), seed, &out);
+    MurmurHash3_x86_32(reinterpret_cast<const char *>(*key), (int) key.length(), seed, &out);
 
     if (isHexMode) {
         std::stringstream ss;
@@ -133,16 +140,17 @@ Handle<Value> murmur32_sync(const Arguments& args) {
 
 Handle<Value> murmur128_sync(const Arguments& args) {
     HandleScope scope;
-    uint32_t seed = 0;
     uint32_t out[4];
 
     REQ_STR_ARG(0);
-    REQ_BOOL_ARG(1);
+    REQ_UINT32_ARG(1);
+    REQ_BOOL_ARG(2);
 
     String::Utf8Value key(args[0]->ToString());
-    bool isHexMode = args[1]->ToBoolean()->Value();
+    uint32_t seed = args[1]->ToUint32()->Value();
+    bool isHexMode = args[2]->ToBoolean()->Value();
 
-    MurmurHash3_x86_128(reinterpret_cast<const char *> (*key), (int) key.length(), seed, &out);
+    MurmurHash3_x86_128(reinterpret_cast<const char *>(*key), (int) key.length(), seed, &out);
 
     if (isHexMode) {
         std::stringstream ss;
@@ -161,11 +169,10 @@ Handle<Value> murmur128_sync(const Arguments& args) {
 }
 
 void Work_murmur32(uv_work_t* req) {
-    Baton *baton = static_cast<Baton *> (req->data);
-    uint32_t seed = 0;
+    Baton *baton = static_cast<Baton *>(req->data);
     uint32_t out;
 
-    MurmurHash3_x86_32(baton->key.c_str(), (int) baton->key.length(), seed, &out);
+    MurmurHash3_x86_32(baton->key.c_str(), (int) baton->key.length(), baton->seed, &out);
     baton->result[0] = out;
 }
 
@@ -175,11 +182,11 @@ void Work_After_murmur32(uv_work_t* req, int status) {
 void Work_After_murmur32(uv_work_t* req) {
 #endif
     HandleScope scope;
-    std::auto_ptr<Baton> baton(static_cast<Baton *> (req->data));
+    std::auto_ptr<Baton> baton(static_cast<Baton *>(req->data));
 
-    Local <Value> res[2];
+    Local < Value > res[2];
 
-    res[0] = Local<Value>::New(Null());
+    res[0] = Local < Value > ::New(Null());
 
     if (baton->isHexMode) {
         Local < Value > tmp = Integer::New(baton->result[0]);
@@ -199,11 +206,10 @@ void Work_After_murmur32(uv_work_t* req) {
 
 void Work_murmur128(uv_work_t *req) {
 
-    Baton *baton = static_cast<Baton *> (req->data);
-    uint32_t seed = 0;
+    Baton *baton = static_cast<Baton *>(req->data);
     uint32_t out[4];
 
-    MurmurHash3_x86_128(baton->key.c_str(), (int) baton->key.length(), seed, &out);
+    MurmurHash3_x86_128(baton->key.c_str(), (int) baton->key.length(), baton->seed, &out);
     for (int i = 0; i < 4; i++) {
         baton->result[i] = out[i];
     }
@@ -215,12 +221,12 @@ void Work_After_murmur128(uv_work_t *req, int status) {
 void Work_After_murmur128(uv_work_t *req) {
 #endif
     HandleScope scope;
-    std::auto_ptr<Baton> baton(static_cast<Baton *> (req->data));
+    std::auto_ptr<Baton> baton(static_cast<Baton *>(req->data));
 
     uint32_t *result = baton->result;
 
     Local < Value > res[2];
-    res[0] = Local<Value>::New(Null());
+    res[0] = Local < Value > ::New(Null());
 
     if (baton->isHexMode) {
         std::stringstream ss;
