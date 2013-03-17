@@ -1,7 +1,12 @@
+0.2.0 / 2013-03-18
+==================
+
+  * Add: The option which specifies arbitrary hash seed.
+
 0.1.7 / 2013-02-21
 ==================
 
-  * Chage test runner to Mocha.
+  * Change test runner to Mocha.
 
 0.1.6 / 2013-02-13
 ==================
