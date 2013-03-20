@@ -429,3 +429,9 @@ Small Device Styles
   }
 
 }
+
+#travisci_badge {
+   width: auto !important;
+   height: auto !important;
+}
+
