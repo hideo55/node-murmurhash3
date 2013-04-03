@@ -1,3 +1,8 @@
+0.2.1 / 2013-04-04
+==================
+
+  * Improved portability(Support big endian enviromet) 
+
 0.2.0 / 2013-03-18
 ==================
 
