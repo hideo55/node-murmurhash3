@@ -11,17 +11,18 @@
 or
 
     $ git clone https://github.com/hideo55/node-murmurhash3.git
-    $ npm install ./node-murmurhash
+    $ npm install ./node-murmurhash3
 
 ## Requirement
 
 ### Node v0.4 and v0.6(v0.6.12 or prior)
 
-You must use node-murmurhash3 0.0.6.
+You must use murmurhash3 0.0.6.
 
-### Node v0.6 (v0.6.13 or later) and v0.8
+### Node v0.6 (v0.6.13 or later), v0.8 and v0.10
 
-You must use node-murmurhash3 0.0.8 or later.
+You must use murmurhash3 0.0.8 or later.
+It is strongly recommended to use latest version.
 
 ## Usage
 
