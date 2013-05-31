@@ -1,3 +1,10 @@
+# Revision history for murmurhash3
+
+0.2.2 / 2013-06-01
+==================
+
+  * Update document
+
 0.2.1 / 2013-04-04
 ==================
 
