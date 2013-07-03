@@ -1,5 +1,10 @@
 # Revision history for murmurhash3
 
+0.2.3 / 2013-07-03
+==================
+
+  * Fixed: Deprecate warning in node v0.11
+
 0.2.2 / 2013-06-01
 ==================
 
