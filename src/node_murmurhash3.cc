@@ -39,6 +39,14 @@
         FatalException(try_catch);                                             \
     }
 
+#if NODE_VERSION_AT_LEAST(0,11,0)
+#define __GET_ISOLATE_FOR_NEW v8::Isolate::GetCurrent(),
+#define __GET_ISOLATE_FOR_DISPOSE v8::Isolate::GetCurrent()
+#else
+#define __GET_ISOLATE_FOR_NEW
+#define __GET_ISOLATE_FOR_DISPOSE
+#endif
+
 using namespace v8;
 using namespace node;
 
@@ -54,10 +62,10 @@ struct Baton {
     Baton(std::string key_, uint32_t seed_, bool isHexMode_, v8::Handle<v8::Function> cb_) :
             key(key_), seed(seed_), isHexMode(isHexMode_) {
         request.data = this;
-        callback = v8::Persistent < v8::Function > ::New(cb_);
+        callback = v8::Persistent < v8::Function > ::New(__GET_ISOLATE_FOR_NEW cb_);
     }
     virtual ~Baton() {
-        callback.Dispose();
+        callback.Dispose(__GET_ISOLATE_FOR_DISPOSE);
     }
 };
 
