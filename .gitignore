@@ -1,0 +1,5 @@
+.project
+.settings
+.lock-wscript
+build
+murmurhash3_binding.node
