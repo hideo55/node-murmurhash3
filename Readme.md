@@ -38,7 +38,7 @@ It is strongly recommended to use latest version.
 
 ## Functions
 
-###Async intefeaces
+###Async interfaces
 
     murmur32(key [,seed], callback);    // return 32bit integer value
     murmur32Hex(key [,seed], callback); // return 32bit hexadecimal string
