@@ -1,5 +1,11 @@
 # Revision history for murmurhash3
 
+0.2.4 / 2014-04-23
+==================
+
+  * Add dependency: NAN (Native Abstractions for Node.js)
+  * Update document
+
 0.2.3 / 2013-07-03
 ==================
 
