@@ -7,9 +7,13 @@
     "url": "https://github.com/hideo55/node-murmurhash3/issues"
   },
   "homepage": "http://hideo55.github.com/node-murmurhash3/",
-  "keywords": ["hash", "murmurhash"],
+  "keywords": [
+    "hash",
+    "murmurhash"
+  ],
   "author": "Hideaki Ohno <hide.o.j55@gmail.com>",
   "dependencies": {
+    "nan": "~0.8.0"
   },
   "devDependencies": {
     "mocha": "1.8.1"

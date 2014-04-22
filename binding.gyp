@@ -7,6 +7,9 @@
       'cflags_cc': ['-fexceptions'],
       'cflags!': ['-fno-exceptions'],
       'cflags_cc!': ['-fno-exception'],
+      "include_dirs" : [
+          "<!(node -e \"require('nan')\")"
+      ],
       'conditions': [
         ['OS=="win"', {
             'msvs_settings': {

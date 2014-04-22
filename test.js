@@ -140,7 +140,7 @@ describe('Exception', function() {
     describe('murmur32', function() {
       it('key must be string', function(done) {
         try {
-          mmh3.murmur32();
+          mmh3.murmur32(undefined, function(){});
         } catch(e) {
           if ((new RegExp(/^Argument 0 must be a String/)).test(e.message)) {
             done();
@@ -149,7 +149,7 @@ describe('Exception', function() {
       });
       it('seed must be unsigned integer', function(done) {
         try {
-          mmh3.murmur32('key', -1);
+          mmh3.murmur32('key', -1, function(){});
         } catch(e) {
           if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
             done();
@@ -160,7 +160,7 @@ describe('Exception', function() {
     describe('murmur128', function() {
       it('key must be string', function(done) {
         try {
-          mmh3.murmur128();
+          mmh3.murmur128(undefined, function(){});
         } catch(e) {
           if ((new RegExp(/^Argument 0 must be a String/)).test(e.message)) {
             done();
@@ -169,7 +169,7 @@ describe('Exception', function() {
       });
       it('seed must be unsigned integer', function(done) {
         try {
-          mmh3.murmur128('key', -1);
+          mmh3.murmur128('key', -1, function() {});
         } catch(e) {
           if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
             done();

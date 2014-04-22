@@ -3,3 +3,4 @@
 .lock-wscript
 build
 murmurhash3_binding.node
+node_modules
