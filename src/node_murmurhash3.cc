@@ -30,15 +30,37 @@
 
 #define REQ_UINT32_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, Uint32)
 
-#define TRY_CATCH_CALL(handle, argc, argv)                          \
-    TryCatch try_catch;                                             \
-    Call((handle), (argc), (argv));                                 \
-    if (try_catch.HasCaught()) {                                    \
-        FatalException(try_catch);                                  \
-    }
-
 using namespace v8;
 using namespace node;
+
+
+static NAN_INLINE(void MakeReturnValue_murmur32(Local<Value>& ret, uint32_t value, bool hexMode)) {
+    if (hexMode) {
+        Local < Value > tmp = Integer::New(value);
+        std::stringstream ss;
+        ss << std::hex << std::setfill('0') << std::setw(8) << tmp->Uint32Value();
+        ret = String::New((ss.str()).c_str());
+    } else {
+        ret = Integer::NewFromUnsigned(value);
+    }
+}
+
+static NAN_INLINE(void MakeReturnValue_murmur128(Local<Value>& ret, uint32_t* value, bool hexMode)) {
+    if (hexMode) {
+        std::stringstream ss;
+        ss << std::hex << std::setfill('0');
+        for (int i = 0; i < 4; i++) {
+            ss << std::setw(8) << value[i];
+        }
+        ret = String::New((ss.str()).c_str());
+    } else {
+        Local<Array> tmp = Array::New(4);
+        for (int i = 0; i < 4; i++) {
+            tmp->Set(Integer::New(i), Integer::NewFromUnsigned(value[i]));
+        }
+        ret = tmp;
+    }
+}
 
 class Murmur32Worker : public NanAsyncWorker {
 public:
@@ -53,17 +75,8 @@ public:
     void HandleOKCallback() {
         NanScope();
         Local < Value > res[2];
-
         res[0] = NanNewLocal(Null());
-
-        if (hexMode_) {
-            Local < Value > tmp = Integer::New(hashValue_);
-            std::stringstream ss;
-            ss << std::hex << std::setfill('0') << std::setw(8) << tmp->Uint32Value();
-            res[1] = String::New((ss.str()).c_str());
-        } else {
-            res[1] = Integer::NewFromUnsigned(hashValue_);
-        }
+        MakeReturnValue_murmur32(res[1], hashValue_, hexMode_);
         callback->Call(2, res);
     }
 
@@ -87,25 +100,8 @@ public:
     void HandleOKCallback() {
         NanScope();
         Local < Value > res[2];
-
         res[0] = NanNewLocal(Null());
-
-        if (hexMode_) {
-            std::stringstream ss;
-            ss << std::hex << std::setfill('0');
-            for (int i = 0; i < 4; i++) {
-                ss << std::setw(8) << hashValue_[i];
-            }
-            res[1] = String::New((ss.str()).c_str());
-        } else {
-            Local < Array > ret = Array::New(4);
-            for (int i = 0; i < 4; i++) {
-                ret->Set(Integer::New(i), Integer::NewFromUnsigned(hashValue_[i]));
-            }
-            res[1] = ret;
-
-        }
-
+        MakeReturnValue_murmur128(res[1], hashValue_, hexMode_);
         callback->Call(2, res);
     }
 
@@ -115,7 +111,6 @@ private:
     uint32_t hashValue_[4];
     bool hexMode_;
 };
-
 
 //Initialize
 void Initialize(Handle<Object> target);
@@ -164,17 +159,13 @@ NAN_METHOD(murmur32_sync) {
 
     String::Utf8Value key(args[0]->ToString());
     uint32_t seed = args[1]->ToUint32()->Value();
-    bool isHexMode = args[2]->ToBoolean()->Value();
+    bool hexMode = args[2]->ToBoolean()->Value();
 
     MurmurHash3_x86_32(reinterpret_cast<const char *>(*key), (int) key.length(), seed, &out);
 
-    if (isHexMode) {
-        std::stringstream ss;
-        ss << std::hex << std::setfill('0') << std::setw(8) << out;
-        NanReturnValue(String::New((ss.str()).c_str()));
-    } else {
-        NanReturnValue(Integer::New(out));
-    }
+    Local<Value> ret;
+    MakeReturnValue_murmur32(ret, out, hexMode);
+    NanReturnValue(ret);
 
 }
 
@@ -188,24 +179,13 @@ NAN_METHOD(murmur128_sync) {
 
     String::Utf8Value key(args[0]->ToString());
     uint32_t seed = args[1]->ToUint32()->Value();
-    bool isHexMode = args[2]->ToBoolean()->Value();
+    bool hexMode = args[2]->ToBoolean()->Value();
 
     MurmurHash3_x86_128(reinterpret_cast<const char *>(*key), (int) key.length(), seed, &out);
 
-    if (isHexMode) {
-        std::stringstream ss;
-        ss << std::hex << std::setfill('0');
-        for (int i = 0; i < 4; i++) {
-            ss << std::setw(8) << out[i];
-        }
-        NanReturnValue(String::New((ss.str()).c_str()));
-    } else {
-        Local < Array > ret = Array::New(4);
-        for (int i = 0; i < 4; i++) {
-            ret->Set(Integer::New(i), Integer::New(out[i]));
-        }
-        NanReturnValue(ret);
-    }
+    Local<Value> ret;
+    MakeReturnValue_murmur128(ret, out, hexMode);
+    NanReturnValue(ret);
 }
 
 void Initialize(Handle<Object> exports) {
