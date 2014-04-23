@@ -15,9 +15,9 @@
 
 #define REQ_ARG_COUNT_AND_TYPE(I, TYPE) \
   if (args.Length() < (I + 1) ) { \
-      ThrowException(Exception::RangeError(String::New("A least " #I " arguments are required"))); \
+      NanThrowRangeError("A least " #I " arguments are required"); \
   } else if (!args[I]->Is##TYPE() || args[I]->IsUndefined()) { \
-      ThrowException(Exception::TypeError(String::New("Argument " #I " must be a " #TYPE))); \
+      NanThrowTypeError("Argument " #I " must be a " #TYPE); \
   }
 
 #define REQ_FUN_ARG(I, VAR) \
