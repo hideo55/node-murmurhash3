@@ -140,7 +140,8 @@ describe('Exception', function() {
     describe('murmur32', function() {
       it('key must be string', function(done) {
         try {
-          mmh3.murmur32(undefined, function(){});
+          mmh3.murmur32(undefined, function() {
+          });
         } catch(e) {
           if ((new RegExp(/^Argument 0 must be a String/)).test(e.message)) {
             done();
@@ -149,7 +150,8 @@ describe('Exception', function() {
       });
       it('seed must be unsigned integer', function(done) {
         try {
-          mmh3.murmur32('key', -1, function(){});
+          mmh3.murmur32('key', -1, function() {
+          });
         } catch(e) {
           if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
             done();
@@ -174,11 +176,31 @@ describe('Exception', function() {
           }
         }
       });
+      it('callback missing - hex', function(done) {
+        try {
+          mmh3.murmur32Hex('key', 0);
+        } catch(e) {
+          if ((new RegExp(/^Callback function is missing/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('not function - hex', function(done) {
+        try {
+          mmh3.murmur32Hex('key', 0, 0);
+        } catch(e) {
+          if ((new RegExp(/^Callback function is missing/)).test(e.message)) {
+            done();
+          }
+        }
+      });
     });
+
     describe('murmur128', function() {
       it('key must be string', function(done) {
         try {
-          mmh3.murmur128(undefined, function(){});
+          mmh3.murmur128(undefined, function() {
+          });
         } catch(e) {
           if ((new RegExp(/^Argument 0 must be a String/)).test(e.message)) {
             done();
@@ -187,7 +209,8 @@ describe('Exception', function() {
       });
       it('seed must be unsigned integer', function(done) {
         try {
-          mmh3.murmur128('key', -1, function() {});
+          mmh3.murmur128('key', -1, function() {
+          });
         } catch(e) {
           if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
             done();
@@ -212,7 +235,26 @@ describe('Exception', function() {
           }
         }
       });
-    });  
+      it('callback missing - hex', function(done) {
+        try {
+          mmh3.murmur128Hex('key', 0);
+        } catch(e) {
+          if ((new RegExp(/^Callback function is missing/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('not function - hex', function(done) {
+        try {
+          mmh3.murmur128Hex('key', 0, 0);
+        } catch(e) {
+          if ((new RegExp(/^Callback function is missing/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+    });
+
     describe('murmur32Sync', function() {
       it('key must be string', function(done) {
         try {
@@ -233,6 +275,7 @@ describe('Exception', function() {
         }
       });
     });
+
     describe('murmur128Sync', function() {
       it('key must be string', function(done) {
         try {
@@ -252,6 +295,6 @@ describe('Exception', function() {
           }
         }
       });
-    });  
+    });
   });
 });
