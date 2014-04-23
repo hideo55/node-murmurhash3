@@ -21,7 +21,7 @@ You must use murmurhash3 0.0.6.
 
 ### Node v0.6, v0.8 and v0.10
 
-You must use murmurhash3 0.2.4 or later.
+You must use murmurhash3 0.2.5 or later.
 It is strongly recommended to use latest version.
 
 ## Usage
