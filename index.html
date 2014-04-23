@@ -31,13 +31,15 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>murmurhash3</h1>
+        <h1>
+<a name="murmurhash3" class="anchor" href="#murmurhash3"><span class="octicon octicon-link"></span></a>murmurhash3</h1>
 
 <p>Node.js binding of <a href="http://code.google.com/p/smhasher/wiki/MurmurHash3">MurmurHash3</a> C++ implementaion.</p>
 
-<p><a href="http://travis-ci.org/hideo55/node-murmurhash3"><img src="https://secure.travis-ci.org/hideo55/node-murmurhash3.png" alt="Build Status" id="travisci_badge"></a></p>
+<p><a href="http://travis-ci.org/hideo55/node-murmurhash3"><img src="https://secure.travis-ci.org/hideo55/node-murmurhash3.png" alt="Build Status"></a></p>
 
-<h2>Install</h2>
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
 
 <pre><code>$ npm install murmurhash3
 </code></pre>
@@ -48,17 +50,22 @@
 $ npm install ./node-murmurhash3
 </code></pre>
 
-<h2>Requirement</h2>
+<h2>
+<a name="requirement" class="anchor" href="#requirement"><span class="octicon octicon-link"></span></a>Requirement</h2>
 
-<h3>Node v0.4 and v0.6(v0.6.12 or prior)</h3>
+<h3>
+<a name="node-v04" class="anchor" href="#node-v04"><span class="octicon octicon-link"></span></a>Node v0.4</h3>
 
-<p>You must use node-murmurhash3 0.0.6.</p>
+<p>You must use murmurhash3 0.0.6.</p>
 
-<h3>Node v0.6 (v0.6.13 or later), v0.8 and v0.10</h3>
+<h3>
+<a name="node-v06-v08-and-v010" class="anchor" href="#node-v06-v08-and-v010"><span class="octicon octicon-link"></span></a>Node v0.6, v0.8 and v0.10</h3>
 
-<p>You must use node-murmurhash3 0.0.8 or later. It is strongly recommended to use latest version.</p>
+<p>You must use murmurhash3 0.2.5 or later.
+It is strongly recommended to use latest version.</p>
 
-<h2>Usage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <pre><code>var mmh3 = require('murmurhash3');
 mmh3.murmur32('key', function(err,hashValue){
@@ -71,9 +78,11 @@ mmh3.murmur128('key', function(err,hashValue){
 });
 </code></pre>
 
-<h2>Functions</h2>
+<h2>
+<a name="functions" class="anchor" href="#functions"><span class="octicon octicon-link"></span></a>Functions</h2>
 
-<h3>Async intefeaces</h3>
+<h3>
+<a name="async-interfaces" class="anchor" href="#async-interfaces"><span class="octicon octicon-link"></span></a>Async interfaces</h3>
 
 <pre><code>murmur32(key [,seed], callback);    // return 32bit integer value
 murmur32Hex(key [,seed], callback); // return 32bit hexadecimal string
@@ -84,7 +93,8 @@ murmur128Hex(key [,seed], callback);// return 128bit hexadecimal string
 <ul>
 <li>'seed' is optional argument. (unsigned integer)</li>
 <li>The callback gets two arguments <code>(error, hashValue)</code>. </li>
-</ul><h3>Sync interfaces</h3>
+</ul><h3>
+<a name="sync-interfaces" class="anchor" href="#sync-interfaces"><span class="octicon octicon-link"></span></a>Sync interfaces</h3>
 
 <pre><code>murmur32Sync(key [,seed]);    // return 32bit integer value
 murmur32HexSync(key, [,seed]); // return 32bit hexadecimal string
@@ -94,13 +104,15 @@ murmur128HexSync(key [,seed]);// return 128bit hexadecimal string
 
 <ul>
 <li>'seed' is optional argument. (unsigned integer)</li>
-</ul><h2>Author</h2>
+</ul><h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
 
 <p>Hideaki Ohno  &lt;hide.o.j55{at}gmail.com&gt;</p>
 
 <p>MurmurHash3(C++ implementaion) by Austin Appleby</p>
 
-<h2>License</h2>
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>(The MIT License)</p>
 
