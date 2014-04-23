@@ -156,6 +156,24 @@ describe('Exception', function() {
           }
         }
       });
+      it('callback missing', function(done) {
+        try {
+          mmh3.murmur32('key', 0);
+        } catch(e) {
+          if ((new RegExp(/^Callback function is missing/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('not function', function(done) {
+        try {
+          mmh3.murmur32('key', 0, 0);
+        } catch(e) {
+          if ((new RegExp(/^Callback function is missing/)).test(e.message)) {
+            done();
+          }
+        }
+      });
     });
     describe('murmur128', function() {
       it('key must be string', function(done) {
@@ -172,6 +190,24 @@ describe('Exception', function() {
           mmh3.murmur128('key', -1, function() {});
         } catch(e) {
           if ((new RegExp(/^Argument 1 must be a Uint32/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('callback missing', function(done) {
+        try {
+          mmh3.murmur128('key', 0);
+        } catch(e) {
+          if ((new RegExp(/^Callback function is missing/)).test(e.message)) {
+            done();
+          }
+        }
+      });
+      it('not function', function(done) {
+        try {
+          mmh3.murmur128('key', 0, 0);
+        } catch(e) {
+          if ((new RegExp(/^Callback function is missing/)).test(e.message)) {
             done();
           }
         }
