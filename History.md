@@ -1,5 +1,13 @@
 # Revision history for murmurhash3
 
+0.2.5 / 2014-04-23
+==================
+
+  * Node.js v0.11 support (v0.12 ready)
+  * Refactoring
+  * Improve test
+  * Update document
+
 0.2.4 / 2014-04-23
 ==================
 
