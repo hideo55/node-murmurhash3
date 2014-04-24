@@ -34,31 +34,30 @@ using namespace v8;
 using namespace node;
 
 
-static NAN_INLINE(void MakeReturnValue_murmur32(Local<Value>& ret, uint32_t value, bool hexMode)) {
+static NAN_INLINE(void MakeReturnValue_murmur32(Local<Value>& ret, uint32_t hashValue, bool hexMode)) {
     if (hexMode) {
-        Local < Value > tmp = Integer::New(value);
         std::stringstream ss;
-        ss << std::hex << std::setfill('0') << std::setw(8) << tmp->Uint32Value();
+        ss << std::hex << std::setfill('0') << std::setw(8) << hashValue;
         ret = String::New((ss.str()).c_str());
     } else {
-        ret = Integer::NewFromUnsigned(value);
+        ret = Integer::NewFromUnsigned(hashValue);
     }
 }
 
-static NAN_INLINE(void MakeReturnValue_murmur128(Local<Value>& ret, uint32_t* value, bool hexMode)) {
+static NAN_INLINE(void MakeReturnValue_murmur128(Local<Value>& ret, uint32_t* hashValue, bool hexMode)) {
     if (hexMode) {
         std::stringstream ss;
         ss << std::hex << std::setfill('0');
         for (int i = 0; i < 4; i++) {
-            ss << std::setw(8) << value[i];
+            ss << std::setw(8) << hashValue[i];
         }
         ret = String::New((ss.str()).c_str());
     } else {
-        Local<Array> tmp = Array::New(4);
+        Local<Array> values = Array::New(4);
         for (int i = 0; i < 4; i++) {
-            tmp->Set(Integer::New(i), Integer::NewFromUnsigned(value[i]));
+            values->Set(Integer::New(i), Integer::NewFromUnsigned(hashValue[i]));
         }
-        ret = tmp;
+        ret = values;
     }
 }
 
@@ -74,7 +73,7 @@ public:
 
     void HandleOKCallback() {
         NanScope();
-        Local < Value > res[2];
+        Local<Value> res[2];
         res[0] = NanNewLocal(Null());
         MakeReturnValue_murmur32(res[1], hashValue_, hexMode_);
         callback->Call(2, res);
@@ -99,7 +98,7 @@ public:
 
     void HandleOKCallback() {
         NanScope();
-        Local < Value > res[2];
+        Local<Value> res[2];
         res[0] = NanNewLocal(Null());
         MakeReturnValue_murmur128(res[1], hashValue_, hexMode_);
         callback->Call(2, res);
