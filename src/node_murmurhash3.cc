@@ -111,9 +111,6 @@ private:
     bool hexMode_;
 };
 
-//Initialize
-void Initialize(Handle<Object> target);
-
 NAN_METHOD(murmur32_async) {
     NanScope();
 
