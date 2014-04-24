@@ -34,6 +34,12 @@ using namespace v8;
 using namespace node;
 
 
+/**
+ * @brief Make return value of murmur32
+ * @param ret[out] Return value
+ * @param hashValue[in] hash value
+ * @param hexMode[in] hexadecimal string mode flag
+ */
 static NAN_INLINE(void MakeReturnValue_murmur32(Local<Value>& ret, uint32_t hashValue, bool hexMode)) {
     if (hexMode) {
         std::stringstream ss;
@@ -44,6 +50,12 @@ static NAN_INLINE(void MakeReturnValue_murmur32(Local<Value>& ret, uint32_t hash
     }
 }
 
+/**
+ * @brief Make return value of murmur128
+ * @param ret[out] Return value
+ * @param hashValue[in] hash value
+ * @param hexMode[in] hexadecimal string mode flag
+ */
 static NAN_INLINE(void MakeReturnValue_murmur128(Local<Value>& ret, uint32_t* hashValue, bool hexMode)) {
     if (hexMode) {
         std::stringstream ss;
@@ -61,16 +73,32 @@ static NAN_INLINE(void MakeReturnValue_murmur128(Local<Value>& ret, uint32_t* ha
     }
 }
 
+/**
+ * @brief UV queue worker for murmur32
+ */
 class Murmur32Worker : public NanAsyncWorker {
 public:
+    /**
+     * @brief Constructor
+     * @param callback[in] Callback functio object
+     * @param key[in] hash key
+     * @param seed[in] hash seed
+     * @param hexMode[in] hexadecimal string mode flag
+     */
     Murmur32Worker(NanCallback *callback, std::string& key, uint32_t seed, bool hexMode)
         : NanAsyncWorker(callback), key_(key), seed_(seed), hexMode_(hexMode) {
     }
 
+    /**
+     * @brief Calculate MurmurHash3(32bit)
+     */
     void Execute() {
         MurmurHash3_x86_32(key_.c_str(), (int) key_.length(), seed_, &hashValue_);
     }
 
+    /**
+     * @brief Invoke callback function
+     */
     void HandleOKCallback() {
         NanScope();
         Local<Value> res[2];
@@ -80,22 +108,38 @@ public:
     }
 
 private:
-    std::string key_;
-    uint32_t seed_;
-    uint32_t hashValue_;
-    bool hexMode_;
+    std::string key_;   /// hash key
+    uint32_t seed_;     /// hash seed
+    uint32_t hashValue_;/// hash value
+    bool hexMode_;      /// hexadecimal string mode flag
 };
 
+/**
+ * @brief UV queue worker for murmur128
+ */
 class Murmur128Worker : public NanAsyncWorker {
 public:
+    /**
+     * @brief Constructor
+     * @param callback[in] Callback functio object
+     * @param key[in] hash key
+     * @param seed[in] hash seed
+     * @param hexMode[in] hexadecimal string mode flag
+     */
     Murmur128Worker(NanCallback *callback, std::string& key, uint32_t seed, bool hexMode)
         : NanAsyncWorker(callback), key_(key), seed_(seed), hexMode_(hexMode) {
     }
 
+    /**
+     * @brief Calculate MurmurHash3(128bit)
+     */
     void Execute() {
         MurmurHash3_x86_128(key_.c_str(), (int) key_.length(), seed_, &hashValue_);
     }
 
+    /**
+     * @brief Invoke callback function
+     */
     void HandleOKCallback() {
         NanScope();
         Local<Value> res[2];
@@ -105,12 +149,15 @@ public:
     }
 
 private:
-    std::string key_;
-    uint32_t seed_;
-    uint32_t hashValue_[4];
-    bool hexMode_;
+    std::string key_;       /// hash key
+    uint32_t seed_;         /// hash seed
+    uint32_t hashValue_[4]; /// hash value
+    bool hexMode_;          /// hexadecimal string mode flag
 };
 
+/**
+ * @brief Calculate MurmurHash3(32bit) with async interface
+ */
 NAN_METHOD(murmur32_async) {
     NanScope();
 
@@ -123,11 +170,15 @@ NAN_METHOD(murmur32_async) {
     uint32_t seed = args[1]->ToUint32()->Value();
 
     NanCallback *callback = new NanCallback(cb);
-    NanAsyncQueueWorker(new Murmur32Worker(callback, key, seed, args[2]->ToBoolean()->Value()));
+    bool hexMode = args[2]->ToBoolean()->Value();
+    NanAsyncQueueWorker(new Murmur32Worker(callback, key, seed, hexMode));
 
     NanReturnUndefined();
 }
 
+/**
+ * @brief Calculate MurmurHash3(128bit) with async interface
+ */
 NAN_METHOD(murmur128_async) {
     NanScope();
 
@@ -140,11 +191,15 @@ NAN_METHOD(murmur128_async) {
     uint32_t seed = args[1]->ToUint32()->Value();
 
     NanCallback *callback = new NanCallback(cb);
-    NanAsyncQueueWorker(new Murmur128Worker(callback, key, seed, args[2]->ToBoolean()->Value()));
+    bool hexMode = args[2]->ToBoolean()->Value();
+    NanAsyncQueueWorker(new Murmur128Worker(callback, key, seed, hexMode));
 
     NanReturnUndefined();
 }
 
+/**
+ * @brief Calculate MurmurHash3(32bit) with sync interface
+ */
 NAN_METHOD(murmur32_sync) {
     NanScope();
     uint32_t out;
@@ -165,6 +220,9 @@ NAN_METHOD(murmur32_sync) {
 
 }
 
+/**
+ * @brief Calculate MurmurHash3(128bit) with sync interface
+ */
 NAN_METHOD(murmur128_sync) {
     NanScope();
     uint32_t out[4];
@@ -184,6 +242,9 @@ NAN_METHOD(murmur128_sync) {
     NanReturnValue(ret);
 }
 
+/**
+ * @brief Initialize
+ */
 void Initialize(Handle<Object> exports) {
     NODE_SET_METHOD(exports, "murmur32", murmur32_async);
     NODE_SET_METHOD(exports, "murmur128", murmur128_async);
