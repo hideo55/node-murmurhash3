@@ -13,6 +13,7 @@
 #include <memory>
 #include "MurmurHash3.h"
 
+// validate the arguments count and type
 #define REQ_ARG_COUNT_AND_TYPE(I, TYPE) \
   if (args.Length() < (I + 1) ) { \
       NanThrowRangeError("A least " #I " arguments are required"); \
@@ -20,19 +21,22 @@
       NanThrowTypeError("Argument " #I " must be a " #TYPE); \
   }
 
+// validate the argument type is 'function' or not.
 #define REQ_FUN_ARG(I, VAR) \
   REQ_ARG_COUNT_AND_TYPE(I, Function) \
   Local<Function> VAR = Local<Function>::Cast(args[I]);
 
+// validate the argument type is 'string' or not.
 #define REQ_STR_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, String)
 
+// validate the argument type is 'boolean' or not.
 #define REQ_BOOL_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, Boolean)
 
+// validate the argument type is 'unsigned int' or not.
 #define REQ_UINT32_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, Uint32)
 
 using namespace v8;
 using namespace node;
-
 
 /**
  * @brief Make return value of murmur32
@@ -244,6 +248,7 @@ NAN_METHOD(murmur128_sync) {
 
 /**
  * @brief Initialize
+ * @param exports[in,out] exports object
  */
 void Initialize(Handle<Object> exports) {
     NODE_SET_METHOD(exports, "murmur32", murmur32_async);
