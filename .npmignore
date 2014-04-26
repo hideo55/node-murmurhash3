@@ -1,3 +1,5 @@
+.lock-wscript
+.git
 .project
 .settings
 .gitignore
@@ -6,4 +8,5 @@
 .travis.yml
 build/
 murmurhash3_binding.node
-
+npm_modules
+npm-debug.log
