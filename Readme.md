@@ -4,7 +4,7 @@
 
  [![Build Status](https://secure.travis-ci.org/hideo55/node-murmurhash3.png)](http://travis-ci.org/hideo55/node-murmurhash3)
 
-## Install
+## Installation
 
     $ npm install murmurhash3
     
@@ -13,25 +13,15 @@ or
     $ git clone https://github.com/hideo55/node-murmurhash3.git
     $ npm install ./node-murmurhash3
 
-## Requirement
-
-### Node v0.4
-
-You must use murmurhash3 0.0.6.
-
-### Node v0.6, v0.8 and v0.10
-
-You must use murmurhash3 0.2.5 or later.
-It is strongly recommended to use latest version.
-
 ## Usage
 
     var mmh3 = require('murmurhash3');
+    
     mmh3.murmur32('key', function(err, hashValue){
       if (err) throw err;
       ...
     });
-    mmh3.murmur128('key', function(err, hashValue){
+    mmh3.murmur128Hex('key', function(err, hashValue){
       if (err) throw err;
       ...
     });
@@ -45,7 +35,7 @@ It is strongly recommended to use latest version.
     murmur128(key [,seed], callback);   // return array that have 4 elements of 32bit integer
     murmur128Hex(key [,seed], callback);// return 128bit hexadecimal string
 
-- 'seed' is optional argument. (unsigned integer)
+- `seed` is optional argument. (unsigned integer)
 - The callback gets two arguments `(error, hashValue)`. 
 
 ###Sync interfaces
@@ -55,7 +45,18 @@ It is strongly recommended to use latest version.
     murmur128Sync(key [,seed]);   // return array that have 4 elements of 32bit integer
     murmur128HexSync(key [,seed]);// return 128bit hexadecimal string
 
-- 'seed' is optional argument. (unsigned integer)
+- `seed` is optional argument. (unsigned integer)
+
+## Requirement
+
+### Node v0.4
+
+You must use murmurhash3 0.0.6.
+
+### Node v0.6, v0.8 and v0.10
+
+You must use murmurhash3 0.2.5 or later.
+It is strongly recommended to use latest version.
 
 ## Author
 
