@@ -1,10 +1,15 @@
 # Revision history for murmurhash3
 
-0.2.6 / 2014-04-27
+0.2.7 / 2014-04-27
 ==================
 
   * Fixed: Document format
   * Refactoring
+
+0.2.6 / 2014-04-27
+==================
+
+  * Unpublished
 
 0.2.5 / 2014-04-23
 ==================
