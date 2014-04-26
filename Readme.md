@@ -27,11 +27,11 @@ It is strongly recommended to use latest version.
 ## Usage
 
     var mmh3 = require('murmurhash3');
-    mmh3.murmur32('key', function(err,hashValue){
+    mmh3.murmur32('key', function(err, hashValue){
       if (err) throw err;
       ...
-   	});
-    mmh3.murmur128('key', function(err,hashValue){
+    });
+    mmh3.murmur128('key', function(err, hashValue){
       if (err) throw err;
       ...
     });
