@@ -39,7 +39,7 @@
 <p><a href="http://travis-ci.org/hideo55/node-murmurhash3"><img src="https://secure.travis-ci.org/hideo55/node-murmurhash3.png" alt="Build Status"></a></p>
 
 <h2>
-<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <pre><code>$ npm install murmurhash3
 </code></pre>
@@ -51,28 +51,15 @@ $ npm install ./node-murmurhash3
 </code></pre>
 
 <h2>
-<a name="requirement" class="anchor" href="#requirement"><span class="octicon octicon-link"></span></a>Requirement</h2>
-
-<h3>
-<a name="node-v04" class="anchor" href="#node-v04"><span class="octicon octicon-link"></span></a>Node v0.4</h3>
-
-<p>You must use murmurhash3 0.0.6.</p>
-
-<h3>
-<a name="node-v06-v08-and-v010" class="anchor" href="#node-v06-v08-and-v010"><span class="octicon octicon-link"></span></a>Node v0.6, v0.8 and v0.10</h3>
-
-<p>You must use murmurhash3 0.2.5 or later.
-It is strongly recommended to use latest version.</p>
-
-<h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <pre><code>var mmh3 = require('murmurhash3');
-mmh3.murmur32('key', function(err,hashValue){
+
+mmh3.murmur32('key', function(err, hashValue){
   if (err) throw err;
   ...
 });
-mmh3.murmur128('key', function(err,hashValue){
+mmh3.murmur128Hex('key', function(err, hashValue){
   if (err) throw err;
   ...
 });
@@ -91,7 +78,8 @@ murmur128Hex(key [,seed], callback);// return 128bit hexadecimal string
 </code></pre>
 
 <ul>
-<li>'seed' is optional argument. (unsigned integer)</li>
+<li>
+<code>seed</code> is optional argument. (unsigned integer)</li>
 <li>The callback gets two arguments <code>(error, hashValue)</code>. </li>
 </ul><h3>
 <a name="sync-interfaces" class="anchor" href="#sync-interfaces"><span class="octicon octicon-link"></span></a>Sync interfaces</h3>
@@ -103,8 +91,23 @@ murmur128HexSync(key [,seed]);// return 128bit hexadecimal string
 </code></pre>
 
 <ul>
-<li>'seed' is optional argument. (unsigned integer)</li>
+<li>
+<code>seed</code> is optional argument. (unsigned integer)</li>
 </ul><h2>
+<a name="requirement" class="anchor" href="#requirement"><span class="octicon octicon-link"></span></a>Requirement</h2>
+
+<h3>
+<a name="node-v04" class="anchor" href="#node-v04"><span class="octicon octicon-link"></span></a>Node v0.4</h3>
+
+<p>You must use murmurhash3 0.0.6.</p>
+
+<h3>
+<a name="node-v06-v08-and-v010" class="anchor" href="#node-v06-v08-and-v010"><span class="octicon octicon-link"></span></a>Node v0.6, v0.8 and v0.10</h3>
+
+<p>You must use murmurhash3 0.2.5 or later.
+It is strongly recommended to use latest version.</p>
+
+<h2>
 <a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
 
 <p>Hideaki Ohno  &lt;hide.o.j55{at}gmail.com&gt;</p>
