@@ -16,9 +16,13 @@
 // validate the arguments count and type
 #define REQ_ARG_COUNT_AND_TYPE(I, TYPE) \
   if (args.Length() < (I + 1) ) { \
-      NanThrowRangeError("A least " #I " arguments are required"); \
-  } else if (!args[I]->Is##TYPE() || args[I]->IsUndefined()) { \
-      NanThrowTypeError("Argument " #I " must be a " #TYPE); \
+      std::stringstream __ss; \
+      __ss << "A least " << I + 1 << " arguments are required"; \
+      return NanThrowRangeError(__ss.str().c_str()); \
+  } else if (!args[I]->Is##TYPE()) { \
+      std::stringstream __ss; \
+      __ss << "Argument " << I + 1 << " must be a " #TYPE; \
+      return NanThrowTypeError(__ss.str().c_str()); \
   }
 
 // validate the argument type is 'function' or not.
@@ -44,13 +48,13 @@ using namespace node;
  * @param hashValue[in] hash value
  * @param hexMode[in] hexadecimal string mode flag
  */
-static NAN_INLINE(void MakeReturnValue_murmur32(Local<Value>& ret, uint32_t hashValue, bool hexMode)) {
+static NAN_INLINE void MakeReturnValue_murmur32(Local<Value>& ret, uint32_t hashValue, bool hexMode) {
     if (hexMode) {
         std::stringstream ss;
         ss << std::hex << std::setfill('0') << std::setw(8) << hashValue;
-        ret = String::New((ss.str()).c_str());
+        ret = NanNew<String>(ss.str().c_str());
     } else {
-        ret = Integer::NewFromUnsigned(hashValue);
+        ret = NanNew<Uint32>(hashValue);
     }
 }
 
@@ -60,18 +64,18 @@ static NAN_INLINE(void MakeReturnValue_murmur32(Local<Value>& ret, uint32_t hash
  * @param hashValue[in] hash value
  * @param hexMode[in] hexadecimal string mode flag
  */
-static NAN_INLINE(void MakeReturnValue_murmur128(Local<Value>& ret, uint32_t* hashValue, bool hexMode)) {
+static NAN_INLINE void MakeReturnValue_murmur128(Local<Value>& ret, uint32_t* hashValue, bool hexMode) {
     if (hexMode) {
         std::stringstream ss;
         ss << std::hex << std::setfill('0');
         for (int i = 0; i < 4; i++) {
             ss << std::setw(8) << hashValue[i];
         }
-        ret = String::New((ss.str()).c_str());
+        ret = NanNew<String>(ss.str().c_str());
     } else {
-        Local<Array> values = Array::New(4);
+        Local<Array> values = NanNew<Array>(4);
         for (int i = 0; i < 4; i++) {
-            values->Set(Integer::New(i), Integer::NewFromUnsigned(hashValue[i]));
+            values->Set(NanNew<Integer>(i), NanNew<Uint32>(hashValue[i]));
         }
         ret = values;
     }
@@ -106,7 +110,7 @@ public:
     void HandleOKCallback() {
         NanScope();
         Local<Value> res[2];
-        res[0] = NanNewLocal(Null());
+        res[0] = NanNew(NanNull());
         MakeReturnValue_murmur32(res[1], hashValue_, hexMode_);
         callback->Call(2, res);
     }
@@ -147,7 +151,7 @@ public:
     void HandleOKCallback() {
         NanScope();
         Local<Value> res[2];
-        res[0] = NanNewLocal(Null());
+        res[0] = NanNew(NanNull());
         MakeReturnValue_murmur128(res[1], hashValue_, hexMode_);
         callback->Call(2, res);
     }
