@@ -2,7 +2,9 @@
 
   Node.js binding of [MurmurHash3](http://code.google.com/p/smhasher/wiki/MurmurHash3) C++ implementaion.
 
- [![Build Status](https://secure.travis-ci.org/hideo55/node-murmurhash3.png)](http://travis-ci.org/hideo55/node-murmurhash3)
+[![NPM](https://nodei.co/npm/murmurhash3.png)](https://nodei.co/npm/murmurhash3/)
+
+[![Build Status](https://secure.travis-ci.org/hideo55/node-murmurhash3.png)](http://travis-ci.org/hideo55/node-murmurhash3)
 
 ## Installation
 
