@@ -4,7 +4,7 @@
 
 [![NPM](https://nodei.co/npm/murmurhash3.png)](https://nodei.co/npm/murmurhash3/)
 
-[![Build Status](https://secure.travis-ci.org/hideo55/node-murmurhash3.png)](http://travis-ci.org/hideo55/node-murmurhash3)
+[![Build Status](https://travis-ci.org/hideo55/node-murmurhash3.svg?branch=master)](http://travis-ci.org/hideo55/node-murmurhash3)
 
 ## Installation
 
