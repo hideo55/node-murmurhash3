@@ -17,6 +17,7 @@ or
 
 ## Usage
 
+    ```javascript
     var mmh3 = require('murmurhash3');
     
     mmh3.murmur32('key', function(err, hashValue){
@@ -27,6 +28,7 @@ or
       if (err) throw err;
       ...
     });
+    ```
 
 ## Functions
 
