@@ -18,16 +18,16 @@ or
 ## Usage
 
 ```javascript
-    var mmh3 = require('murmurhash3');
+var mmh3 = require('murmurhash3');
     
-    mmh3.murmur32('key', function(err, hashValue){
-      if (err) throw err;
-      ...
-    });
-    mmh3.murmur128Hex('key', function(err, hashValue){
-      if (err) throw err;
-      ...
-    });
+mmh3.murmur32('key', function(err, hashValue){
+  if (err) throw err;
+  ...
+});
+mmh3.murmur128Hex('key', function(err, hashValue){
+  if (err) throw err;
+  ...
+});
 ```
 
 ## Functions
