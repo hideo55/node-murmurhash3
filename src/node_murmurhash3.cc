@@ -110,7 +110,7 @@ public:
     void HandleOKCallback() {
         NanScope();
         Local<Value> res[2];
-        res[0] = NanNew(NanNull());
+        res[0] = NanNull();
         MakeReturnValue_murmur32(res[1], hashValue_, hexMode_);
         callback->Call(2, res);
     }
@@ -151,7 +151,7 @@ public:
     void HandleOKCallback() {
         NanScope();
         Local<Value> res[2];
-        res[0] = NanNew(NanNull());
+        res[0] = NanNull();
         MakeReturnValue_murmur128(res[1], hashValue_, hexMode_);
         callback->Call(2, res);
     }
