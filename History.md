@@ -1,5 +1,10 @@
 # Revision history for murmurhash3
 
+0.2.10 / 2014-05-27
+==================
+
+  * Update nan version from 1.0.0 to 1.1.0
+
 0.2.9 / 2014-05-17
 ==================
 
