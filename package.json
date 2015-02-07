@@ -13,7 +13,7 @@
   ],
   "author": "Hideaki Ohno <hide.o.j55@gmail.com>",
   "dependencies": {
-    "nan": "1.1.0"
+    "nan": "~1.6.2"
   },
   "devDependencies": {
     "mocha": "1.8.1"
