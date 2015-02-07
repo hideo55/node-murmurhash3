@@ -1,5 +1,10 @@
 # Revision history for murmurhash3
 
+0.3.1 / 2015-02-07
+==================
+
+   * Fixed document bug
+
 0.3.0 / 2015-02-07
 ==================
 
