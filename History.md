@@ -1,5 +1,11 @@
 # Revision history for murmurhash3
 
+0.3.0 / 2015-02-07
+==================
+
+  * io.js ready
+  * Deprecate: node v0.6
+
 0.2.10 / 2014-05-27
 ==================
 

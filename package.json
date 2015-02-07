@@ -1,6 +1,6 @@
 {
   "name": "murmurhash3",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "Node binding of MurmurHash3",
   "repository": "https://github.com/hideo55/node-murmurhash3",
   "bugs": {
@@ -20,7 +20,7 @@
   },
   "main": "./lib/murmurhash3.js",
   "engines": {
-    "node": ">=0.6.13"
+    "node": ">=0.8.0"
   },
   "scripts": {
     "test": "mocha -R spec test/test.js"
