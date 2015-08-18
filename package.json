@@ -24,5 +24,6 @@
   },
   "scripts": {
     "test": "mocha -R spec test/test.js"
-  }
+  },
+  "license": "MIT"
 }
