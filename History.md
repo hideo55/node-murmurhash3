@@ -1,5 +1,10 @@
 # Revision history for murmurhash3
 
+0.3.3 / 2015-08-18
+==================
+
+   * Add support for io.js@v3 (by rocktz)
+
 0.3.2 / 2015-05-09
 ==================
 
