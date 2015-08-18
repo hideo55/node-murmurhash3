@@ -4,4 +4,16 @@ node_js:
   - "0.10"
   - "0.12"
   - "iojs"
-sudo: false
+compiler:
+  - gcc
+env:
+  - CXX=g++
+before_install:
+  # g++4.8.1
+  - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
+  - sudo apt-get update -qq
+install:
+  # g++4.8.1
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"; fi
+  - npm install
