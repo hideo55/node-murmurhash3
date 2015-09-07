@@ -9,14 +9,14 @@
   "homepage": "http://hideo55.github.com/node-murmurhash3/",
   "keywords": [
     "hash",
-    "murmurhash"
+    "murmurhash3"
   ],
   "author": "Hideaki Ohno <hide.o.j55@gmail.com>",
   "dependencies": {
     "nan": "2.0.5"
   },
   "devDependencies": {
-    "mocha": "1.8.1"
+    "mocha": "~2.3.0"
   },
   "main": "./lib/murmurhash3.js",
   "engines": {
