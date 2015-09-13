@@ -5,15 +5,6 @@ node_js:
   - "0.12"
 matrix:
   include:
-    - node_js: "iojs"
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-4.8
-      before_install:
-          - export CXX="g++-4.8"
     - nodejs: "4.0"
       addons:
         apt:
