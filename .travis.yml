@@ -3,15 +3,13 @@ node_js:
   - "0.8"
   - "0.10"
   - "0.12"
-matrix:
-  include:
-    - nodejs: "4.0"
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-4.8
-      before_install:
-          - export CXX="g++-4.8"
+  - "4.0"
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+before_install:
+  - export CXX="g++-4.8"
 sudo: false
