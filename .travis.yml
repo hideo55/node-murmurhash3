@@ -24,4 +24,3 @@ matrix:
       before_install:
           - export CXX="g++-4.8"
 sudo: false
-
