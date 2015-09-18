@@ -9,7 +9,7 @@
   "homepage": "http://hideo55.github.com/node-murmurhash3/",
   "keywords": [
     "hash",
-    "murmurhash"
+    "murmurhash",
     "murmurhash3"
   ],
   "author": "Hideaki Ohno <hide.o.j55@gmail.com>",
