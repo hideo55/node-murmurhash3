@@ -1,5 +1,10 @@
 # Revision history for murmurhash3
 
+0.3.4 / 2015-09-26
+==================
+
+   * Update package.json
+
 0.3.3 / 2015-08-18
 ==================
 
