@@ -175,7 +175,7 @@ NAN_METHOD(murmur32_async) {
     REQ_FUN_ARG(3, cb);
 
     std::string key = *String::Utf8Value(info[0]->ToString());
-    uint32_t seed = info[1]->ToUint32()->Value();
+    uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
 
     Nan::Callback *callback = new Nan::Callback(cb);
     bool hexMode = info[2]->ToBoolean()->Value();
@@ -196,7 +196,7 @@ NAN_METHOD(murmur128_async) {
     REQ_FUN_ARG(3, cb);
 
     std::string key = *String::Utf8Value(info[0]->ToString());
-    uint32_t seed = info[1]->ToUint32()->Value();
+    uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
 
     Nan::Callback *callback = new Nan::Callback(cb);
     bool hexMode = info[2]->ToBoolean()->Value();
@@ -217,7 +217,7 @@ NAN_METHOD(murmur32_sync) {
     REQ_BOOL_ARG(2);
 
     String::Utf8Value key(info[0]->ToString());
-    uint32_t seed = info[1]->ToUint32()->Value();
+    uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
     bool hexMode = info[2]->ToBoolean()->Value();
 
     MurmurHash3_x86_32(reinterpret_cast<const char *>(*key), (int) key.length(), seed, &out);
@@ -240,7 +240,7 @@ NAN_METHOD(murmur128_sync) {
     REQ_BOOL_ARG(2);
 
     String::Utf8Value key(info[0]->ToString());
-    uint32_t seed = info[1]->ToUint32()->Value();
+    uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
     bool hexMode = info[2]->ToBoolean()->Value();
 
     MurmurHash3_x86_128(reinterpret_cast<const char *>(*key), (int) key.length(), seed, &out);

@@ -1,6 +1,6 @@
 {
   "name": "murmurhash3",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Node binding of MurmurHash3",
   "repository": "https://github.com/hideo55/node-murmurhash3",
   "bugs": {
@@ -14,10 +14,10 @@
   ],
   "author": "Hideaki Ohno <hide.o.j55@gmail.com>",
   "dependencies": {
-    "nan": "2.3.5"
+    "nan": "2.4.0"
   },
   "devDependencies": {
-    "mocha": "~2.0.0"
+    "mocha": "3.2.0"
   },
   "main": "./lib/murmurhash3.js",
   "engines": {
