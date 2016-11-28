@@ -53,8 +53,7 @@ mmh3.murmur128Hex('key', function(err, hashValue){
 
 ## Requirement
 
-- Node v0.8, v0.10 and v0.12
-- io.js v1.0, v2.0, v3.0
+- Node v0.12 or later
 
 ## Author
 
