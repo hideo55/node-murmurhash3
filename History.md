@@ -1,5 +1,12 @@
 # Revision history for murmurhash3
 
+0.4.0 / 2016-11-30
+==================
+
+   * Update version of NAN
+   * Update version of Mocha
+   * Change the supported Node engine version
+
 0.3.5 / 2016-06-28
 ==================
 
