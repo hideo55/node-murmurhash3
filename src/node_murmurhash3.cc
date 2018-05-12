@@ -39,6 +39,12 @@
 // validate the argument type is 'unsigned int' or not.
 #define REQ_UINT32_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, Uint32)
 
+#if NODE_MODULE_VERSION < NODE_8_0_MODULE_VERSION
+#define TO_UTF8VALUE(str) *String::Utf8Value(str)
+#else
+#define TO_UTF8VALUE(str) *String::Utf8Value(v8::Isolate::GetCurrent(), str)
+#endif
+
 using namespace v8;
 using namespace node;
 
@@ -174,7 +180,7 @@ NAN_METHOD(murmur32_async) {
     REQ_BOOL_ARG(2);
     REQ_FUN_ARG(3, cb);
 
-    std::string key = *String::Utf8Value(v8::Isolate::GetCurrent(), info[0]->ToString());
+    std::string key = TO_UTF8VALUE(info[0]->ToString());
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
 
     Nan::Callback *callback = new Nan::Callback(cb);
@@ -195,7 +201,7 @@ NAN_METHOD(murmur128_async) {
     REQ_BOOL_ARG(2);
     REQ_FUN_ARG(3, cb);
 
-    std::string key = *String::Utf8Value(v8::Isolate::GetCurrent(), info[0]->ToString());
+    std::string key = TO_UTF8VALUE(info[0]->ToString());
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
 
     Nan::Callback *callback = new Nan::Callback(cb);
@@ -216,11 +222,11 @@ NAN_METHOD(murmur32_sync) {
     REQ_UINT32_ARG(1);
     REQ_BOOL_ARG(2);
 
-    String::Utf8Value key(v8::Isolate::GetCurrent(), info[0]->ToString());
+    std::string key = TO_UTF8VALUE(info[0]->ToString());
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
     bool hexMode = info[2]->ToBoolean()->Value();
 
-    MurmurHash3_x86_32(reinterpret_cast<const char *>(*key), (int) key.length(), seed, &out);
+    MurmurHash3_x86_32(key.c_str(), (int) key.length(), seed, &out);
 
     Local<Value> ret;
     MakeReturnValue_murmur32(ret, out, hexMode);
@@ -239,11 +245,11 @@ NAN_METHOD(murmur128_sync) {
     REQ_UINT32_ARG(1);
     REQ_BOOL_ARG(2);
 
-    String::Utf8Value key(v8::Isolate::GetCurrent(), info[0]->ToString());
+    std::string key = TO_UTF8VALUE(info[0]->ToString());
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
     bool hexMode = info[2]->ToBoolean()->Value();
 
-    MurmurHash3_x86_128(reinterpret_cast<const char *>(*key), (int) key.length(), seed, &out);
+    MurmurHash3_x86_128(key.c_str(), (int) key.length(), seed, &out);
 
     Local<Value> ret;
     MakeReturnValue_murmur128(ret, out, hexMode);
