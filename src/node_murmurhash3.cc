@@ -112,7 +112,7 @@ public:
         Local<Value> res[2];
         res[0] = Nan::Null();
         MakeReturnValue_murmur32(res[1], hashValue_, hexMode_);
-        callback->Call(2, res);
+        callback->Call(2, res, async_resource);
     }
 
 private:
@@ -153,7 +153,7 @@ public:
         Local<Value> res[2];
         res[0] = Nan::Null();
         MakeReturnValue_murmur128(res[1], hashValue_, hexMode_);
-        callback->Call(2, res);
+        callback->Call(2, res, async_resource);
     }
 
 private:
@@ -174,7 +174,7 @@ NAN_METHOD(murmur32_async) {
     REQ_BOOL_ARG(2);
     REQ_FUN_ARG(3, cb);
 
-    std::string key = *String::Utf8Value(info[0]->ToString());
+    std::string key = *String::Utf8Value(v8::Isolate::GetCurrent(), info[0]->ToString());
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
 
     Nan::Callback *callback = new Nan::Callback(cb);
@@ -195,7 +195,7 @@ NAN_METHOD(murmur128_async) {
     REQ_BOOL_ARG(2);
     REQ_FUN_ARG(3, cb);
 
-    std::string key = *String::Utf8Value(info[0]->ToString());
+    std::string key = *String::Utf8Value(v8::Isolate::GetCurrent(), info[0]->ToString());
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
 
     Nan::Callback *callback = new Nan::Callback(cb);
@@ -216,7 +216,7 @@ NAN_METHOD(murmur32_sync) {
     REQ_UINT32_ARG(1);
     REQ_BOOL_ARG(2);
 
-    String::Utf8Value key(info[0]->ToString());
+    String::Utf8Value key(v8::Isolate::GetCurrent(), info[0]->ToString());
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
     bool hexMode = info[2]->ToBoolean()->Value();
 
@@ -239,7 +239,7 @@ NAN_METHOD(murmur128_sync) {
     REQ_UINT32_ARG(1);
     REQ_BOOL_ARG(2);
 
-    String::Utf8Value key(info[0]->ToString());
+    String::Utf8Value key(v8::Isolate::GetCurrent(), info[0]->ToString());
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
     bool hexMode = info[2]->ToBoolean()->Value();
 
