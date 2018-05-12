@@ -39,10 +39,10 @@
 // validate the argument type is 'unsigned int' or not.
 #define REQ_UINT32_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, Uint32)
 
-#if NODE_MODULE_VERSION < NODE_8_0_MODULE_VERSION
-#define TO_UTF8VALUE(str) *String::Utf8Value(str)
-#else
+#if (defined(V8_MAJOR_VERSION) && (V8_MAJOR_VERSION) > 6) || (defined(V8_MAJOR_VERSION) && (V8_MAJOR_VERSION) == 6 && defined(V8_MINOR_VERSION) && (V8_MINOR_VERSION) > 2)
 #define TO_UTF8VALUE(str) *String::Utf8Value(v8::Isolate::GetCurrent(), str)
+#else
+#define TO_UTF8VALUE(str) *String::Utf8Value(str)
 #endif
 
 using namespace v8;
