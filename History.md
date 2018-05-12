@@ -1,5 +1,11 @@
 # Revision history for murmurhash3
 
+0.4.1 / 2018-05-13
+==================
+
+   * Update version of NAN
+   * Fixed "deprecated warnings"
+
 0.4.0 / 2016-11-30
 ==================
 
