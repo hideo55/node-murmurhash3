@@ -1,5 +1,10 @@
 # Revision history for murmurhash3
 
+0.4.2 / 2018-08-23
+==================
+
+   * Update Mocha
+
 0.4.1 / 2018-05-13
 ==================
 
