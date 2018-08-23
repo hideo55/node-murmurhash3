@@ -53,7 +53,7 @@ mmh3.murmur128Hex('key', function(err, hashValue){
 
 ## Requirement
 
-- Node v0.12 or later
+- Node v4 or later
 
 ## Author
 
