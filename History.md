@@ -1,5 +1,10 @@
 # Revision history for murmurhash3
 
+0.4.3 / 2019-09-21
+==================
+
+   * Adding support for node12 (by svedbg)
+
 0.4.2 / 2018-08-23
 ==================
 
