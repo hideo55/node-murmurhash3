@@ -39,10 +39,17 @@
 // validate the argument type is 'unsigned int' or not.
 #define REQ_UINT32_ARG(I) REQ_ARG_COUNT_AND_TYPE(I, Uint32)
 
-#if (defined(V8_MAJOR_VERSION) && (V8_MAJOR_VERSION) > 6) || (defined(V8_MAJOR_VERSION) && (V8_MAJOR_VERSION) == 6 && defined(V8_MINOR_VERSION) && (V8_MINOR_VERSION) > 2)
-#define TO_UTF8VALUE(str) *String::Utf8Value(v8::Isolate::GetCurrent(), str)
+#define isolate v8::Isolate::GetCurrent()
+
+#if NODE_VERSION_AT_LEAST(12, 0, 0)
+#define TO_UTF8VALUE(str) *String::Utf8Value(isolate, str);
+#define ToBoolean(bool) bool->BooleanValue(isolate);
+#elif NODE_VERSION_AT_LEAST(9, 0, 0)
+#define TO_UTF8VALUE(str) *String::Utf8Value(isolate, str);
+#define ToBoolean(bool) bool->BooleanValue();
 #else
-#define TO_UTF8VALUE(str) *String::Utf8Value(str)
+#define TO_UTF8VALUE(str) *String::Utf8Value(str);
+#define ToBoolean(bool) bool->BooleanValue();
 #endif
 
 using namespace v8;
@@ -180,11 +187,11 @@ NAN_METHOD(murmur32_async) {
     REQ_BOOL_ARG(2);
     REQ_FUN_ARG(3, cb);
 
-    std::string key = TO_UTF8VALUE(info[0]->ToString());
+    std::string key = TO_UTF8VALUE(info[0]);
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
 
     Nan::Callback *callback = new Nan::Callback(cb);
-    bool hexMode = info[2]->ToBoolean()->Value();
+    bool hexMode = ToBoolean(info[2]);
     Nan::AsyncQueueWorker(new Murmur32Worker(callback, key, seed, hexMode));
 
     info.GetReturnValue().Set(Nan::Undefined());
@@ -201,11 +208,11 @@ NAN_METHOD(murmur128_async) {
     REQ_BOOL_ARG(2);
     REQ_FUN_ARG(3, cb);
 
-    std::string key = TO_UTF8VALUE(info[0]->ToString());
+    std::string key = TO_UTF8VALUE(info[0]);
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
 
     Nan::Callback *callback = new Nan::Callback(cb);
-    bool hexMode = info[2]->ToBoolean()->Value();
+    bool hexMode = ToBoolean(info[2]);
     Nan::AsyncQueueWorker(new Murmur128Worker(callback, key, seed, hexMode));
 
     info.GetReturnValue().Set(Nan::Undefined());
@@ -222,9 +229,9 @@ NAN_METHOD(murmur32_sync) {
     REQ_UINT32_ARG(1);
     REQ_BOOL_ARG(2);
 
-    std::string key = TO_UTF8VALUE(info[0]->ToString());
+    std::string key = TO_UTF8VALUE(info[0]);
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
-    bool hexMode = info[2]->ToBoolean()->Value();
+    bool hexMode =  ToBoolean(info[2]);
 
     MurmurHash3_x86_32(key.c_str(), (int) key.length(), seed, &out);
 
@@ -245,9 +252,9 @@ NAN_METHOD(murmur128_sync) {
     REQ_UINT32_ARG(1);
     REQ_BOOL_ARG(2);
 
-    std::string key = TO_UTF8VALUE(info[0]->ToString());
+    std::string key = TO_UTF8VALUE(info[0]);
     uint32_t seed = Nan::To<uint32_t>(info[1]).FromJust();
-    bool hexMode = info[2]->ToBoolean()->Value();
+    bool hexMode =  ToBoolean(info[2]);
 
     MurmurHash3_x86_128(key.c_str(), (int) key.length(), seed, &out);
 
