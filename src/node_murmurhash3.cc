@@ -86,9 +86,10 @@ static NAN_INLINE void MakeReturnValue_murmur128(Local<Value>& ret, uint32_t* ha
         }
         ret = Nan::New<String>(ss.str().c_str()).ToLocalChecked();;
     } else {
+        Local<Context> context = isolate->GetCurrentContext();
         Local<Array> values = Nan::New<Array>(4);
         for (int i = 0; i < 4; i++) {
-            values->Set(Nan::New<Integer>(i), Nan::New<Uint32>(hashValue[i]));
+            values->Set(context, Nan::New<Integer>(i), Nan::New<Uint32>(hashValue[i]));
         }
         ret = values;
     }
