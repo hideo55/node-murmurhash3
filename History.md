@@ -1,5 +1,10 @@
 # Revision history for murmurhash3
 
+0.5.0 / 2020-11-02
+==================
+
+   * Adding support for node v14.15.0 (by svedbg) 
+
 0.4.3 / 2019-09-21
 ==================
 
