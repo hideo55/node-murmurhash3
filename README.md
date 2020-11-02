@@ -32,7 +32,7 @@ mmh3.murmur128Hex('key', function(err, hashValue){
 
 ## Functions
 
-###Async interfaces
+### Async interfaces
 
     murmur32(key [,seed], callback);    // return 32bit integer value
     murmur32Hex(key [,seed], callback); // return 32bit hexadecimal string
@@ -42,7 +42,7 @@ mmh3.murmur128Hex('key', function(err, hashValue){
 - `seed` is optional argument. (unsigned integer)
 - The callback gets two arguments `(error, hashValue)`. 
 
-###Sync interfaces
+### Sync interfaces
 
     murmur32Sync(key [,seed]);    // return 32bit integer value
     murmur32HexSync(key, [,seed]); // return 32bit hexadecimal string
